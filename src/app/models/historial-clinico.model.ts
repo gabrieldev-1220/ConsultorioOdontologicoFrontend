@@ -28,6 +28,17 @@ export interface EvolucionVisita {
   profesional: string;
 }
 
+// AÑADIDO: interfaz para odontólogo
+export interface Odontologo {
+  idOdontologo?: number;
+  nombre: string;
+  apellido: string;
+  matricula?: string;
+  telefono?: string;
+  email?: string;
+  especialidad?: string;
+}
+
 export interface HistorialClinico {
   idHistorial?: number;
   idPaciente: number;
@@ -39,7 +50,11 @@ export interface HistorialClinico {
   examenIntraoral: ExamenIntraoral;
   diagnostico: string;
   planTratamiento: string;
-  evoluciones: EvolucionVisita[]; // CORREGIDO: sin valor por defecto
+  evoluciones: EvolucionVisita[];
   consentimientoInformado: boolean;
   fechaActualizacion?: string;
+
+  // AÑADIDO: campos del backend
+  observacion?: string;
+  odontologo?: Odontologo;
 }

@@ -19,6 +19,40 @@
   cursor: pointer;
 }
 
+.info-medica-section {
+  background: #f0f8ff;
+  border: 1px solid #b3e0ff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.info-medica-section h3 {
+  margin-top: 0;
+  color: #185a9d;
+  border-bottom: 1px solid #b3e0ff;
+  padding-bottom: 10px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 15px;
+}
+
+.info-item {
+  background: white;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.info-item strong {
+  color: #185a9d;
+  display: block;
+  margin-bottom: 5px;
+}
+
 .lista {
   display: grid;
   gap: 15px;
@@ -40,20 +74,16 @@
   box-shadow: 0 8px 16px rgba(0,0,0,0.1);
 }
 
-.fecha {
+.fecha-visita {
   font-weight: bold;
   color: #185a9d;
   font-size: 14px;
 }
 
-.motivo {
-  margin: 8px 0;
-  color: #495057;
-}
-
-.profesional {
+.odontologo {
   font-size: 13px;
   color: #6c757d;
+  margin-top: 8px;
 }
 
 .empty {
@@ -61,4 +91,58 @@
   color: #6c757d;
   font-style: italic;
   padding: 40px;
+}
+
+/* MODAL */
+.modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background: white;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.modal-header {
+  background: #185a9d;
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h3 {
+  margin: 0;
+}
+
+.btn-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.modal-body p {
+  margin: 10px 0;
+  font-size: 15px;
+}
+
+.modal-body strong {
+  color: #185a9d;
 }

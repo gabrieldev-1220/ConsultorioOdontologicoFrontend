@@ -1,18 +1,63 @@
 <div class="historial-container">
+  <!-- INFORMACIÓN MÉDICA GENERAL -->
+  <div class="info-medica-section">
+    <h3>Información Médica General</h3>
+    <div class="info-grid">
+      <div class="info-item">
+        <strong>Alergias:</strong> {{ infoMedica?.alergias || 'Ninguna' }}
+      </div>
+      <div class="info-item">
+        <strong>Medicaciones actuales:</strong> {{ infoMedica?.medicacionesActuales || 'Ninguna' }}
+      </div>
+      <div class="info-item">
+        <strong>Antecedentes médicos:</strong> {{ infoMedica?.antecedentesMedicos || 'Ninguno' }}
+      </div>
+      <div class="info-item">
+        <strong>Antecedentes odontológicos:</strong> {{ infoMedica?.antecedentesOdontologicos || 'Ninguno' }}
+      </div>
+      <div class="info-item">
+        <strong>Hábitos:</strong> {{ infoMedica?.habitos || 'Ninguno' }}
+      </div>
+      <div class="info-item">
+        <strong>Observaciones médicas:</strong> {{ infoMedica?.observacionesMedicas || 'Ninguna' }}
+      </div>
+    </div>
+  </div>
+
+  <!-- HISTORIAL DE VISITAS -->
   <div class="header">
-    <h3>Historial Clínico</h3>
+    <h3>Historial de Visitas</h3>
     <button class="btn-nuevo" (click)="nuevoHistorial()">+ Nuevo Historial</button>
   </div>
 
   <div class="lista" *ngIf="historiales.length > 0; else noHistorial">
-    <div *ngFor="let h of historiales" class="historial-card" (click)="verHistorial(h)">
-      <div class="fecha">{{ h.fechaCreacion | date:'dd/MM/yyyy' }}</div>
-      <div class="motivo">{{ h.motivoConsulta | truncate:60 }}</div>
-      <div class="profesional">Dr. {{ h.evoluciones[0].profesional || 'No asignado' }}</div>
+    <div *ngFor="let h of historiales" class="historial-card" (click)="abrirModal(h)">
+      <div class="fecha-visita">
+        <strong>Fecha de visita:</strong> {{ h.fechaCreacion | date:'dd/MM/yyyy' }}
+      </div>
+      <<div class="odontologo">Dr. {{ h.odontologo?.nombre }} {{ h.odontologo?.apellido }}</div>
     </div>
   </div>
 
   <ng-template #noHistorial>
-    <p class="empty">No hay historiales clínicos registrados.</p>
+    <p class="empty">No hay visitas registradas.</p>
   </ng-template>
+
+  <!-- MODAL DETALLE -->
+  <div class="modal" *ngIf="historialSeleccionado">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Detalle de Visita</h3>
+        <button class="btn-close" (click)="cerrarModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Fecha:</strong> {{ historialSeleccionado.fechaCreacion | date:'dd/MM/yyyy' }}</p>
+        <p><strong>Motivo:</strong> {{ historialSeleccionado.motivoConsulta }}</p>
+        <p><strong>Diagnóstico:</strong> {{ historialSeleccionado.diagnostico }}</p>
+        <p><strong>Observación:</strong> {{ historialSeleccionado.observacion || 'Sin observación' }}</p>
+        <p><strong>Tratamiento:</strong> {{ historialSeleccionado.planTratamiento }}</p>
+        <p><strong>Odontólogo:</strong> Dr. {{ historialSeleccionado.odontologo?.nombre }} {{ historialSeleccionado.odontologo?.apellido }}</p>
+      </div>
+    </div>
+  </div>
 </div>

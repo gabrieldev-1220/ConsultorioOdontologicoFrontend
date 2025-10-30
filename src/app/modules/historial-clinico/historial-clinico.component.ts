@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { HistorialClinicoService } from '../../core/services/historial-clinico.service';
+import { InformacionMedicaService } from '../../core/services/informacion-medica.service';
 import { HistorialClinico } from '../../models/historial-clinico.model';
+import { InformacionMedica } from '../../models/informacion-medica.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,28 +14,31 @@ import { Router } from '@angular/router';
 export class HistorialClinicoComponent implements OnInit {
   @Input() pacienteId!: number;
   historiales: HistorialClinico[] = [];
+  infoMedica: InformacionMedica | null = null;
+  historialSeleccionado: HistorialClinico | null = null;
 
   constructor(
     private historialService: HistorialClinicoService,
+    private infoMedicaService: InformacionMedicaService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
     this.cargarHistoriales();
+    this.cargarInfoMedica();
   }
 
   cargarHistoriales() {
     this.historialService.getPorPaciente(this.pacienteId).subscribe({
-      next: (data) => {
-        this.historiales = (data || []).map(h => ({
-          ...h,
-          evoluciones: h.evoluciones || [] // Asegurar que siempre exista
-        }));
-      },
-      error: (err) => {
-        console.error('Error al cargar historiales del paciente', this.pacienteId, err);
-        this.historiales = [];
-      }
+      next: (data) => this.historiales = data || [],
+      error: () => console.error('Error al cargar historiales')
+    });
+  }
+
+  cargarInfoMedica() {
+    this.infoMedicaService.getPorPaciente(this.pacienteId).subscribe({
+      next: (data) => this.infoMedica = data,
+      error: () => this.infoMedica = null
     });
   }
 
@@ -41,7 +46,11 @@ export class HistorialClinicoComponent implements OnInit {
     this.router.navigate(['/historial-form', this.pacienteId]);
   }
 
-  verHistorial(historial: HistorialClinico) {
-    this.router.navigate(['/historial-form', this.pacienteId, historial.idHistorial]);
+  abrirModal(historial: HistorialClinico) {
+    this.historialSeleccionado = historial;
+  }
+
+  cerrarModal() {
+    this.historialSeleccionado = null;
   }
 }
