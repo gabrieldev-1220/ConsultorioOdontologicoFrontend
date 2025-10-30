@@ -1,0 +1,30 @@
+<div class="card fade-in">
+  <div class="card-header">
+    <h3>Lista de Historial Clínico</h3>
+    <a routerLink="new" class="btn btn-success">Nueva Entrada</a>
+  </div>
+  <div class="card-body">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Paciente ID</th>
+          <th>Fecha</th>
+          <th>Motivo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let historial of historiales">
+          <td>{{ historial.idHistorial }}</td>
+          <td>{{ historial.idPaciente }}</td>
+          <td>{{ historial.fechaCreacion | date:'dd/MM/yyyy' }}</td>
+          <td>{{ historial.motivoConsulta }}</td>
+          <td>
+            <a routerLink="{{historial.idHistorial}}/edit" class="btn btn-primary btn-sm">Editar</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

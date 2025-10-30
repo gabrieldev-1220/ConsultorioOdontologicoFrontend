@@ -1,0 +1,44 @@
+<div class="sidebar" [ngClass]="{'active': !sidebarActive}">
+  <div class="sidebar-header">
+    <div class="profile-section">
+      <img [src]="authService.getAvatar() || 'assets/images/avatar_def.png'" alt="Avatar" class="avatar" />
+      <div class="profile-info">
+        <h4>{{ authService.getFullName() || 'Odontólogo Desconocido' }}</h4>
+        <p>Matrícula: {{ authService.getMatricula() || 'N/A' }}</p>
+      </div>
+    </div>
+  </div>
+  <ul class="sidebar-menu">
+    <li class="menu-item" *ngIf="authService.getRol() === 'odontologo'" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+      <a routerLink="/dashboard">
+        <span>🦷 Inicio</span>
+      </a>
+    </li>
+    <li class="menu-item" *ngIf="authService.getRol() === 'odontologo'" routerLinkActive="active">
+      <a routerLink="/pacientes">
+        <span>👨‍⚕️ Pacientes</span>
+      </a>
+    </li>
+    <li class="menu-item" *ngIf="authService.getRol() === 'odontologo'" routerLinkActive="active">
+      <a routerLink="/turnos">
+        <span>📅 Citas / Turnos</span>
+      </a>
+    </li>
+    <li class="menu-item" *ngIf="authService.getRol() === 'odontologo'" routerLinkActive="active">
+      <a routerLink="/pagos">
+        <span>💳 Facturación / Pagos</span>
+      </a>
+    </li>
+    <li class="menu-item" *ngIf="authService.getRol() === 'odontologo'" routerLinkActive="active">
+      <a routerLink="/tratamientos">
+        <span>🦷 Tratamientos</span>
+      </a>
+    </li>
+    <li class="menu-item" (click)="logout()">
+      <a>
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Cerrar Sesión</span>
+      </a>
+    </li>
+  </ul>
+</div>

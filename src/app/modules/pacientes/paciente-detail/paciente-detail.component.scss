@@ -1,0 +1,48 @@
+.paciente-detail-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #185a9d;
+}
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tabs button {
+  padding: 12px 20px;
+  border: none;
+  background: #f8f9fa;
+  color: #495057;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+
+.tabs button:hover {
+  background: #e9ecef;
+}
+
+.tabs button.active {
+  background: linear-gradient(315deg, #43cea2 0%, #185a9d 75%);
+  color: white;
+}
+
+.tab-content > div {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  min-height: 500px;
+}

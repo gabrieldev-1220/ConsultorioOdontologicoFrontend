@@ -1,0 +1,30 @@
+<div class="card fade-in">
+  <div class="card-header">
+    <h3>Lista de Usuarios</h3>
+    <a routerLink="new" class="btn btn-success">Nuevo Usuario</a>
+  </div>
+  <div class="card-body">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Username</th>
+          <th>Rol</th>
+          <th>Odontólogo ID</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of usuarios">
+          <td>{{ usuario.idUsuario }}</td>
+          <td>{{ usuario.username }}</td>
+          <td>{{ usuario.rol }}</td>
+          <td>{{ usuario.idOdontologo }}</td>
+          <td>
+            <a routerLink="{{usuario.idUsuario}}/edit" class="btn btn-primary btn-sm">Editar</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

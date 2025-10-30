@@ -1,0 +1,76 @@
+<div class="form-container" *ngIf="historial">
+  <h2>{{ esNuevo ? 'Nuevo' : 'Editar' }} Historial Clínico</h2>
+
+  <form (ngSubmit)="guardar()">
+    <!-- MOTIVO -->
+    <div class="form-group">
+      <label>Motivo de Consulta</label>
+      <textarea [(ngModel)]="historial.motivoConsulta" name="motivo" rows="3" required></textarea>
+    </div>
+
+    <!-- ANTECEDENTES -->
+    <div class="section">
+      <h3>Antecedentes</h3>
+      <div class="form-group">
+        <label>Médicos (alergias, enfermedades, medicamentos)</label>
+        <textarea [(ngModel)]="historial.antecedentesMedicos.alergias" name="alergias" placeholder="Alergias"></textarea>
+        <textarea [(ngModel)]="historial.antecedentesMedicos.enfermedades" name="enfermedades" placeholder="Enfermedades"></textarea>
+        <textarea [(ngModel)]="historial.antecedentesMedicos.medicamentos" name="medicamentos" placeholder="Medicamentos"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Odontológicos</label>
+        <textarea [(ngModel)]="historial.antecedentesOdontologicos" name="odontologicos" rows="3"></textarea>
+      </div>
+    </div>
+
+    <!-- EXÁMENES -->
+    <div class="section">
+      <h3>Examen Clínico</h3>
+      <div class="form-group">
+        <label>Extraoral</label>
+        <textarea [(ngModel)]="historial.examenExtraoral.atm" name="atm" placeholder="ATM"></textarea>
+        <textarea [(ngModel)]="historial.examenExtraoral.ganglios" name="ganglios" placeholder="Ganglios"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Intraoral</label>
+        <textarea [(ngModel)]="historial.examenIntraoral.mucosas" name="mucosas" placeholder="Mucosas"></textarea>
+        <textarea [(ngModel)]="historial.examenIntraoral.encias" name="encias" placeholder="Encías"></textarea>
+      </div>
+    </div>
+
+    <!-- DIAGNÓSTICO Y PLAN -->
+    <div class="form-group">
+      <label>Diagnóstico</label>
+      <textarea [(ngModel)]="historial.diagnostico" name="diagnostico" rows="3"></textarea>
+    </div>
+    <div class="form-group">
+      <label>Plan de Tratamiento</label>
+      <textarea [(ngModel)]="historial.planTratamiento" name="plan" rows="4"></textarea>
+    </div>
+
+    <!-- EVOLUCIONES -->
+    <div class="section">
+      <h3>Evolución</h3>
+      <div *ngFor="let ev of historial.evoluciones; let i = index" class="evolucion">
+        <input [(ngModel)]="ev.fecha" [ngModelOptions]="{standalone: true}" type="date">
+        <input [(ngModel)]="ev.profesional" [ngModelOptions]="{standalone: true}" placeholder="Profesional">
+        <textarea [(ngModel)]="ev.descripcion" [ngModelOptions]="{standalone: true}" rows="2"></textarea>
+        <button type="button" (click)="eliminarEvolucion(i)">×</button>
+      </div>
+      <button type="button" class="btn-agregar-evolucion" (click)="agregarEvolucion()">+ Agregar Evolución</button>
+    </div>
+
+    <!-- CONSENTIMIENTO -->
+    <div class="form-group">
+      <label>
+        <input type="checkbox" [(ngModel)]="historial.consentimientoInformado" name="consentimiento">
+        Consentimiento informado firmado
+      </label>
+    </div>
+
+    <div class="actions">
+      <button type="submit" class="btn-guardar">Guardar Historial</button>
+      <button type="button" (click)="volver()" class="btn-cancelar">Cancelar</button>
+    </div>
+  </form>
+</div>

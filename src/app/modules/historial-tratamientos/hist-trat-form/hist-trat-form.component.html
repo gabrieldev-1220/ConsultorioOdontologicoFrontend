@@ -1,0 +1,32 @@
+<div class="card fade-in">
+  <div class="card-header">
+    <h3>{{ id ? 'Editar' : 'Nueva' }} Entrada de Historial de Tratamientos</h3>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="form" (submit)="onSubmit()">
+      <div class="mb-3">
+        <label>Historial Clínico</label>
+        <select formControlName="idHistorial" class="form-control">
+          <option *ngFor="let h of historiales" [value]="h.idHistorial">
+            {{ h.idHistorial }} - {{ h.fechaCreacion | date:'dd/MM/yyyy' }}
+          </option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label>Tratamiento</label>
+        <select formControlName="idTratamiento" class="form-control">
+          <option *ngFor="let t of tratamientos" [value]="t.idTratamiento">{{ t.nombre }}</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label>Cantidad</label>
+        <input type="number" formControlName="cantidad" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label>Precio Unitario</label>
+        <input type="number" formControlName="precioUnitario" class="form-control">
+      </div>
+      <button type="submit" class="btn btn-success" [disabled]="form.invalid">Guardar</button>
+    </form>
+  </div>
+</div>

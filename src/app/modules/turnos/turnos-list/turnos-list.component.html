@@ -1,0 +1,14 @@
+<div class="turnos-wrapper">
+  <h2>Mis Turnos</h2>
+  <div *ngIf="loading" class="loading">Cargando turnos...</div>
+  <div *ngIf="!loading && noDataMessage" class="no-data">{{ noDataMessage }}</div>
+  <ul class="turnos-list" *ngIf="!loading && turnos.length > 0">
+    <li class="turno-item" *ngFor="let turno of turnos">
+      <div class="turno-time">{{ turno.fechaHora | date:'HH:mm' }}</div>
+      <div class="turno-details">
+        <p><strong>Paciente:</strong> {{ getPacienteName(turno.idPaciente) }}</p>
+        <p><strong>Estado:</strong> {{ turno.estado }}</p>
+      </div>
+    </li>
+  </ul>
+</div>

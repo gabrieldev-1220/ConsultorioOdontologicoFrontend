@@ -1,0 +1,30 @@
+<div class="pacientes-container">
+  <h2>Mis Pacientes</h2>
+  <div class="search-bar">
+    <input type="text" [(ngModel)]="searchQuery" (input)="onSearch()" placeholder="Buscar por nombre, apellido o DNI..." />
+    <button class="add-btn" (click)="addPaciente()">Agregar nuevo paciente</button>
+  </div>
+  <table class="pacientes-table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>DNI</th>
+        <th>Teléfono</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let paciente of filteredPacientes">
+        <td>{{ paciente.nombre }}</td>
+        <td>{{ paciente.apellido }}</td>
+        <td>{{ paciente.dni }}</td>
+        <td>{{ paciente.telefono }}</td>
+        <td>
+          <button class="view-btn" (click)="viewFicha(paciente.idPaciente)">Ver Ficha</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p *ngIf="filteredPacientes.length === 0">No se encontraron pacientes.</p>
+</div>

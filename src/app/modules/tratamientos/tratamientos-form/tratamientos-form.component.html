@@ -1,0 +1,22 @@
+<div class="card fade-in">
+  <div class="card-header">
+    <h3>{{ id ? 'Editar' : 'Nuevo' }} Tratamiento</h3>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="form" (submit)="onSubmit()">
+      <div class="mb-3">
+        <label>Nombre</label>
+        <input formControlName="nombre" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label>Descripción</label>
+        <textarea formControlName="descripcion" class="form-control"></textarea>
+      </div>
+      <div class="mb-3">
+        <label>Precio</label>
+        <input type="number" formControlName="precio" class="form-control">
+      </div>
+      <button type="submit" class="btn btn-success" [disabled]="form.invalid">Guardar</button>
+    </form>
+  </div>
+</div>

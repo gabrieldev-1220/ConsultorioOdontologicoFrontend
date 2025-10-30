@@ -1,0 +1,27 @@
+<div class="card fade-in">
+  <div class="card-header">
+    <h3>Bitácora de Acciones</h3>
+  </div>
+  <div class="card-body">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Usuario ID</th> <!-- Cambiado de "Usuario" a "Usuario ID" -->
+          <th>Acción</th>
+          <th>Fecha</th>
+          <th>Detalles</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let entry of bitacora">
+          <td>{{ entry.idBitacora }}</td>
+          <td>{{ entry.idUsuario }}</td> <!-- Cambiado de entry.usuario?.username a entry.idUsuario -->
+          <td>{{ entry.accion }}</td>
+          <td>{{ entry.fecha | date }}</td>
+          <td>{{ entry.detalles }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

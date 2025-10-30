@@ -1,0 +1,59 @@
+<div class="dashboard-container">
+  <h2>Bienvenido, {{ username }}</h2>
+
+  <div class="stats-cards" *ngIf="!stats.loading; else loadingTpl">
+    <div class="card">
+      <h3>Pacientes totales</h3>
+      <p>{{ stats.pacientesTotal }}</p>
+    </div>
+    <div class="card">
+      <h3>Turnos hoy</h3>
+      <p>{{ stats.turnosHoy }}</p>
+    </div>
+    <div class="card">
+      <h3>Historiales hoy</h3>
+      <p>{{ stats.historialesHoy }}</p>
+    </div>
+  </div>
+
+  <ng-template #loadingTpl>
+    <p>Cargando datos...</p>
+  </ng-template>
+
+  <div class="turnos-hoy" *ngIf="turnosHoy.length > 0">
+    <h3>Turnos del día</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Paciente</th>
+          <th>Odontólogo</th>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let turno of turnosHoy">
+          <td>{{ turno.paciente }}</td>
+          <td>{{ turno.odontologo }}</td>
+          <td>{{ turno.fecha | date:'dd/MM/yyyy' }}</td>
+          <td>{{ turno.hora }}</td>
+          <td>
+            <span [ngClass]="{
+              'estado-pendiente': turno.estado === 'pendiente',
+              'estado-confirmado': turno.estado === 'confirmado',
+              'estado-realizado': turno.estado === 'realizado',
+              'estado-cancelado': turno.estado === 'cancelado'
+            }">
+              {{ turno.estado }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p *ngIf="!stats.loading && turnosHoy.length === 0">
+    No hay turnos para el día de hoy.
+  </p>
+</div>

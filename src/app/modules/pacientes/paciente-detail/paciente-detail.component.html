@@ -1,0 +1,37 @@
+<div class="paciente-detail-container" *ngIf="paciente">
+  <div class="header">
+    <h2>{{ paciente.nombre }} {{ paciente.apellido }}</h2>
+    <p>DNI: {{ paciente.dni }} | Tel: {{ paciente.telefono }}</p>
+  </div>
+
+  <div class="tabs">
+    <button [class.active]="activeTab === 'info'" (click)="setTab('info')">Información</button>
+    <button [class.active]="activeTab === 'odontograma'" (click)="setTab('odontograma')">Odontograma</button>
+    <button [class.active]="activeTab === 'historial'" (click)="setTab('historial')">Historia Clínica</button>
+    <button [class.active]="activeTab === 'presupuesto'" (click)="setTab('presupuesto')">Presupuesto</button>
+  </div>
+
+  <div class="tab-content">
+    <!-- INFO -->
+    <div *ngIf="activeTab === 'info'">
+      <p><strong>Email:</strong> {{ paciente.email }}</p>
+      <p><strong>Dirección:</strong> {{ paciente.direccion }}</p>
+      <p><strong>Fecha Nacimiento:</strong> {{ paciente.fechaNacimiento | date:'dd/MM/yyyy' }}</p>
+    </div>
+
+    <!-- ODONTOGRAMA -->
+    <div *ngIf="activeTab === 'odontograma'">
+      <app-odontogram [pacienteId]="pacienteId"></app-odontogram>
+    </div>
+
+    <!-- HISTORIAL CLÍNICO -->
+    <div *ngIf="activeTab === 'historial'">
+      <app-historial-clinico [pacienteId]="pacienteId"></app-historial-clinico>
+    </div>
+
+    <!-- PRESUPUESTO -->
+    <div *ngIf="activeTab === 'presupuesto'">
+      <app-odontogram [pacienteId]="pacienteId"></app-odontogram>
+    </div>
+  </div>
+</div>

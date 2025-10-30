@@ -1,0 +1,33 @@
+<div class="card fade-in">
+  <div class="card-header">
+    <h3>{{ id ? 'Editar' : 'Nuevo' }} Usuario</h3>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="form" (submit)="onSubmit()">
+      <div class="mb-3">
+        <label>Username</label>
+        <input formControlName="username" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label>Contraseña</label>
+        <input type="password" formControlName="password" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label>Rol</label>
+        <select formControlName="rol" class="form-control">
+          <option value="admin">Admin</option>
+          <option value="odontologo">Odontólogo</option>
+          <option value="recepcionista">Recepcionista</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label>Odontólogo (opcional)</label>
+        <select formControlName="idOdontologo" class="form-control">
+          <option [value]="null">Ninguno</option>
+          <option *ngFor="let o of odontologos" [value]="o.idOdontologo">{{ o.nombre }} {{ o.apellido }}</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-success" [disabled]="form.invalid">Guardar</button>
+    </form>
+  </div>
+</div>

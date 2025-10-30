@@ -1,0 +1,32 @@
+<div class="card fade-in">
+  <div class="card-header">
+    <h3>Lista de Historial de Tratamientos</h3>
+    <a routerLink="new" class="btn btn-success">Nueva Entrada</a>
+  </div>
+  <div class="card-body">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Historial ID</th>
+          <th>Tratamiento ID</th> <!-- Cambiado de "Tratamiento" a "Tratamiento ID" -->
+          <th>Cantidad</th>
+          <th>Precio Unitario</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ht of historialTratamientos">
+          <td>{{ ht.idHistorialTratamiento }}</td>
+          <td>{{ ht.idHistorial }}</td>
+          <td>{{ ht.idTratamiento }}</td> <!-- Cambiado de ht.tratamiento?.nombre a ht.idTratamiento -->
+          <td>{{ ht.cantidad }}</td>
+          <td>{{ ht.precioUnitario | currency }}</td>
+          <td>
+            <a routerLink="{{ht.idHistorialTratamiento}}/edit" class="btn btn-primary btn-sm">Editar</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

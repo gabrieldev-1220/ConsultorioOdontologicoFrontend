@@ -1,0 +1,25 @@
+<div class="card fade-in">
+  <div class="card-header">
+    <h3>Reportes</h3>
+  </div>
+  <div class="card-body">
+    <h4>Ingresos (ejemplo)</h4>
+    <p>{{ reportes.ingresos | currency }}</p>
+    <h4>Deudas Pendientes</h4>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Paciente</th>
+          <th>Saldo Pendiente</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let deuda of reportes.deudas">
+          <td>{{ deuda.nombre }} {{ deuda.apellido }}</td>
+          <td>{{ deuda.saldoPendiente | currency }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- Agrega secciones para otros reportes -->
+  </div>
+</div>

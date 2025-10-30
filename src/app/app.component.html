@@ -1,0 +1,16 @@
+<ng-container *ngIf="isAuthenticated(); else loginTemplate">
+  <app-header></app-header>
+  <app-sidebar></app-sidebar>
+  <div class="container-fluid mt-5 p-0">
+    <router-outlet></router-outlet>
+  </div>
+</ng-container>
+
+<!-- 
+<div *ngIf="isDevMode()" class="bg-yellow-500 text-white p-2 text-center">
+  ⚠️ MODO DESARROLLO: Autenticación desactivada
+</div> -->
+
+<ng-template #loginTemplate>
+  <router-outlet></router-outlet>
+</ng-template>

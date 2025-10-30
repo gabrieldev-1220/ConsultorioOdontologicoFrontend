@@ -1,0 +1,18 @@
+<div class="historial-container">
+  <div class="header">
+    <h3>Historial Clínico</h3>
+    <button class="btn-nuevo" (click)="nuevoHistorial()">+ Nuevo Historial</button>
+  </div>
+
+  <div class="lista" *ngIf="historiales.length > 0; else noHistorial">
+    <div *ngFor="let h of historiales" class="historial-card" (click)="verHistorial(h)">
+      <div class="fecha">{{ h.fechaCreacion | date:'dd/MM/yyyy' }}</div>
+      <div class="motivo">{{ h.motivoConsulta | truncate:60 }}</div>
+      <div class="profesional">Dr. {{ h.evoluciones[0].profesional || 'No asignado' }}</div>
+    </div>
+  </div>
+
+  <ng-template #noHistorial>
+    <p class="empty">No hay historiales clínicos registrados.</p>
+  </ng-template>
+</div>

@@ -1,0 +1,233 @@
+<div class="odontogram-container" *ngIf="!loading; else loadingTpl">
+  <div class="controls">
+    <button (click)="resetView()">Restablecer Vista</button>
+    <button (click)="guardar()">Guardar Odontograma y Plan</button>
+    <button (click)="toggleNumeration()">
+      {{ numeroMode === 'UNIVERSAL' ? 'Cambiar a FDI' : 'Cambiar a 1–32' }}
+    </button>
+  </div>
+
+  <!-- LEYENDA DE COLORES -->
+  <div class="legend">
+    <h4>Leyenda de superficies dentales</h4>
+    <div class="legend-items">
+      <div class="legend-item">
+        <span class="color-box" style="background-color: #FFFFFF; border: 1px solid #ccc;"></span>
+        <span class="label">Sano</span>
+      </div>
+      <div class="legend-item">
+        <span class="color-box" style="background-color: #FF0000;"></span>
+        <span class="label">Caries</span>
+      </div>
+      <div class="legend-item">
+        <span class="color-box" style="background-color: #0000FF;"></span>
+        <span class="label">Empaste</span>
+      </div>
+      <div class="legend-item">
+        <span class="color-box" style="background-color: #00A300;"></span>
+        <span class="label">Perdida</span>
+      </div>
+      <div class="legend-item">
+        <span class="color-box" style="background-color: #FFFF00;"></span>
+        <span class="label">Fractura</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="svg-wrap">
+    <svg #odontogramaSvg width="100%" height="280" viewBox="0 0 2400 600" xmlns="http://www.w3.org/2000/svg">
+      <!-- Maxilar Superior -->
+      <g *ngFor="let td of upperTeeth" [attr.transform]="'translate(' + td.cx + ',' + td.cy + ')'">
+        <circle cx="0" cy="0" [attr.r]="toothRadius" fill="none" stroke="#333" stroke-width="2"></circle>
+        <path class="sector" [attr.d]="sectorPath(td.pieza,'bucal')" [attr.fill]="getSectorColor(td.pieza,'bucal')" stroke="#333" stroke-width="0.8" (click)="toggleSectorColor(td.pieza,'bucal')"></path>
+        <path class="sector" [attr.d]="sectorPath(td.pieza,'distal')" [attr.fill]="getSectorColor(td.pieza,'distal')" stroke="#333" stroke-width="0.8" (click)="toggleSectorColor(td.pieza,'distal')"></path>
+        <path class="sector" [attr.d]="sectorPath(td.pieza,'lingual')" [attr.fill]="getSectorColor(td.pieza,'lingual')" stroke="#333" stroke-width="0.8" (click)="toggleSectorColor(td.pieza,'lingual')"></path>
+        <path class="sector" [attr.d]="sectorPath(td.pieza,'mesial')" [attr.fill]="getSectorColor(td.pieza,'mesial')" stroke="#333" stroke-width="0.8" (click)="toggleSectorColor(td.pieza,'mesial')"></path>
+        <circle class="sector-oclusal" cx="0" cy="0" [attr.r]="getOclusalRadius()" [attr.fill]="getSectorColor(td.pieza,'oclusal')" stroke="#333" stroke-width="0.8" (click)="toggleSectorColor(td.pieza,'oclusal')"></circle>
+        <text [attr.x]="getLabelX(td)" [attr.y]="getLabelY(td)" text-anchor="middle" font-size="22" font-weight="bold" fill="#222">
+          {{ getToothLabel(td) }}
+        </text>
+        <foreignObject [attr.x]="getComboX(td)" [attr.y]="getComboY(td)" width="160" height="60">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="pieza-controls">
+            <select (change)="cambiarEstado(td.pieza, $event)" [value]="td.pieza.estado">
+              <option *ngFor="let est of estadosDisponibles" [value]="est">{{ est }}</option>
+            </select>
+          </div>
+        </foreignObject>
+      </g>
+
+      <!-- Maxilar Inferior -->
+      <g *ngFor="let td of lowerTeeth" [attr.transform]="'translate(' + td.cx + ',' + td.cy + ')'">
+        <circle cx="0" cy="0" [attr.r]="toothRadius" fill="none" stroke="#333" stroke-width="2"></circle>
+        <path class="sector" [attr.d]="sectorPath(td.pieza,'bucal')" [attr.fill]="getSectorColor(td.pieza,'bucal')" stroke="#333" stroke-width="0.8" (click)="toggleSectorColor(td.pieza,'bucal')"></path>
+        <path class="sector" [attr.d]="sectorPath(td.pieza,'distal')" [attr.fill]="getSectorColor(td.pieza,'distal')" stroke="#333" stroke-width="0.8" (click)="toggleSectorColor(td.pieza,'distal')"></path>
+        <path class="sector" [attr.d]="sectorPath(td.pieza,'lingual')" [attr.fill]="getSectorColor(td.pieza,'lingual')" stroke="#333" stroke-width="0.8" (click)="toggleSectorColor(td.pieza,'lingual')"></path>
+        <path class="sector" [attr.d]="sectorPath(td.pieza,'mesial')" [attr.fill]="getSectorColor(td.pieza,'mesial')" stroke="#333" stroke-width="0.8" (click)="toggleSectorColor(td.pieza,'mesial')"></path>
+        <circle class="sector-oclusal" cx="0" cy="0" [attr.r]="getOclusalRadius()" [attr.fill]="getSectorColor(td.pieza,'oclusal')" stroke="#333" stroke-width="0.8" (click)="toggleSectorColor(td.pieza,'oclusal')"></circle>
+        <text [attr.x]="getLabelX(td)" [attr.y]="getLabelY(td)" text-anchor="middle" font-size="22" font-weight="bold" fill="#222">
+          {{ getToothLabel(td) }}
+        </text>
+        <foreignObject [attr.x]="getComboX(td)" [attr.y]="getComboY(td)" width="160" height="60">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="pieza-controls">
+            <select (change)="cambiarEstado(td.pieza, $event)" [value]="td.pieza.estado">
+              <option *ngFor="let est of estadosDisponibles" [value]="est">{{ est }}</option>
+            </select>
+          </div>
+        </foreignObject>
+      </g>
+    </svg>
+  </div>
+
+  <!-- SECCIÓN DE PROCEDIMIENTOS -->
+  <div class="procedimientos-section">
+    <h3>Plan de Tratamiento</h3>
+
+    <div class="filtro-categoria">
+      <label>Filtrar por categoría:</label>
+      <select [(ngModel)]="categoriaSeleccionada" (change)="filtrarProcedimientos()">
+        <option *ngFor="let cat of categorias" [value]="cat">
+          {{ cat === 'todos' ? 'Todas las categorías' : cat }}
+        </option>
+      </select>
+    </div>
+
+    <div class="lista-procedimientos">
+      <div *ngFor="let proc of procedimientosFiltrados" class="procedimiento-item">
+        <div class="info">
+          <strong>{{ proc.nombre }}</strong>
+          <small>{{ proc.categoria }} • {{ proc.duracionMinutos }} min • ${{ proc.costo | number:'1.0-0' }}</small>
+        </div>
+        <button class="btn-agregar" (click)="agregarProcedimiento(proc)">+</button>
+      </div>
+    </div>
+
+    <div class="tratamiento-seleccionado" *ngIf="procedimientosSeleccionados.length > 0">
+      <h4>Procedimientos seleccionados ({{ procedimientosSeleccionados.length }})</h4>
+      <ul>
+        <li *ngFor="let p of procedimientosSeleccionados">
+          {{ p.nombre }} <button (click)="quitarProcedimiento(p)">x</button>
+        </li>
+      </ul>
+      <div class="totales">
+        <strong>Total estimado: ${{ getTotalCosto() | number:'1.0-0' }}</strong>
+        <span>• Duración: {{ getTotalDuracion() }} min</span>
+      </div>
+    </div>
+
+    <!-- SECCIÓN DE OBSERVACIONES -->
+    <div class="observaciones-section">
+      <h4>Observaciones</h4>
+      <textarea [(ngModel)]="observaciones" placeholder="Escribe las observaciones aquí..." rows="4"></textarea>
+    </div>
+  </div>
+
+  <!-- Botones de generación -->
+  <div class="d-flex justify-content-center gap-3 my-4">
+    <button 
+      class="css-button-gradient--4" 
+      (click)="generarPresupuestoPDF()" 
+      [disabled]="procedimientosSeleccionados.length === 0">
+      Generar Presupuesto PDF
+    </button>
+    <!-- <button class="btn btn-info text-white" (click)="exportarOdontogramaPDF()">
+      Exportar Odontograma PDF
+    </button> -->
+  </div>
+
+  <!-- Sección oculta para impresión del presupuesto -->
+  <div #presupuestoPrint style="display: none;">
+    <div style="font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin: auto;">
+      <!-- ENCABEZADO CON LOGO -->
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; border-bottom: 2px solid #2c3e50; padding-bottom: 10px;">
+        <div style="flex: 1;">
+          <img src="assets/images/icono_pdf.jpg" alt="Logo Consultorio" style="height: 80px; object-fit: contain;">
+        </div>
+        <div style="text-align: right; flex: 2;">
+          <h2 style="margin: 0; color: #2c3e50; font-size: 24px;">PRESUPUESTO ODONTOLÓGICO</h2>
+          <p style="margin: 5px 0; font-size: 14px; color: #555;">
+            Consultorio Odontológico<br>
+            Tel: (123) 456-7890 | Email: info"&#64;"consultorio.com
+          </p>
+        </div>
+      </div>
+
+      <!-- DATOS DEL PACIENTE Y FECHA -->
+      <div style="display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 14px;">
+        <div>
+          <p style="margin: 4px 0;"><strong>Paciente:</strong> {{ paciente?.nombre }} {{ paciente?.apellido }}</p>
+          <p style="margin: 4px 0;"><strong>DNI:</strong> {{ paciente?.dni }}</p>
+          <p style="margin: 4px 0;"><strong>Teléfono:</strong> {{ paciente?.telefono }}</p>
+        </div>
+        <div style="text-align: right;">
+          <p style="margin: 4px 0;"><strong>Fecha:</strong> {{ today | date:'dd/MM/yyyy' }}</p>
+          <p style="margin: 4px 0;"><strong>Presupuesto N°:</strong> {{ pacienteId }}</p>
+        </div>
+      </div>
+
+      <!-- TABLA DE PROCEDIMIENTOS -->
+      <h4 style="color: #2c3e50; border-bottom: 1px solid #ddd; padding-bottom: 5px;">Procedimientos Seleccionados</h4>
+      <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px;">
+        <thead>
+          <tr style="background-color: #f8f9fa;">
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Procedimiento</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Duración</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: right;">Costo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let proc of procedimientosSeleccionados">
+            <td style="border: 1px solid #ddd; padding: 8px;">{{ proc.nombre }}</td>
+            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ proc.duracionMinutos }} min</td>
+            <td style="border: 1px solid #ddd; padding: 8px; text-align: right;">$ {{ proc.costo | number:'1.2-2' }}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="2" style="border: 1px solid #ddd; padding: 8px; text-align: right; font-weight: bold; background-color: #f8f9fa;">
+              TOTAL:
+            </td>
+            <td style="border: 1px solid #ddd; padding: 8px; text-align: right; font-weight: bold; background-color: #e9ecef; color: #2c3e50;">
+              $ {{ getTotalCosto() | number:'1.2-2' }}
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <!-- OBSERVACIONES -->
+      <div *ngIf="observaciones" style="margin-top: 20px; font-size: 13px;">
+        <p style="margin: 0 0 8px 0; font-weight: bold; color: #2c3e50;">Observaciones:</p>
+        <p style="white-space: pre-wrap; margin: 0; background-color: #f9f9f9; padding: 10px; border-left: 4px solid #2c3e50;">
+          {{ observaciones }}
+        </p>
+      </div>
+
+      <!-- PIE DE PÁGINA -->
+      <div style="margin-top: 40px; text-align: center; font-size: 11px; color: #7f8c8d; border-top: 1px solid #eee; padding-top: 10px;">
+        <p style="margin: 5px 0;">
+          Presupuesto válido por 30 días • Consultorio Odontológico • Todos los derechos reservados
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PREVISUALIZACIÓN DE PDF -->
+  <div *ngIf="pdfBlobUrl" class="pdf-preview-overlay">
+    <div class="pdf-preview-container">
+      <div class="pdf-preview-header">
+        <h5>Previsualización del {{ pdfType === 'odontograma' ? 'Odontograma' : 'Presupuesto' }}</h5>
+        <button class="btn-close" (click)="cerrarPreview()"></button>
+      </div>
+      <iframe #previewIframe class="pdf-iframe" [src]="pdfBlobUrl" frameborder="0"></iframe>
+      <div class="pdf-preview-footer">
+        <button class="btn btn-success" (click)="descargarPDF()">Descargar PDF</button>
+        <button class="btn btn-secondary" (click)="cerrarPreview()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loadingTpl>
+  <div class="loading">
+    <p>Cargando odontograma...</p>
+  </div>
+</ng-template>

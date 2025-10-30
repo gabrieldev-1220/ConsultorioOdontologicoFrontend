@@ -1,0 +1,43 @@
+.turnos-wrapper {
+  padding: 2rem;
+  background-color: var(--white);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+
+  h2 {
+    color: var(--secondary);
+    margin-bottom: 1.5rem;
+  }
+
+  .loading, .no-data {
+    text-align: center;
+    color: var(--secondary);
+    font-style: italic;
+  }
+
+  .turnos-list {
+    list-style: none;
+    padding: 0;
+
+    .turno-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem;
+      border-bottom: 1px solid var(--neutral-gray);
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #f9f9f9;
+      }
+
+      .turno-time {
+        font-weight: 600;
+        color: var(--secondary);
+      }
+
+      .turno-details p {
+        margin: 0.2rem 0;
+      }
+    }
+  }
+}

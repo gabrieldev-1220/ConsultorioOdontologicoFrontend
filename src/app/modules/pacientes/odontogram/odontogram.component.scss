@@ -1,0 +1,316 @@
+:host {
+  display: block;
+  margin: 16px 0;
+  font-family: Inter, Arial, sans-serif;
+}
+
+.controls {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.controls button {
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+  font-weight: 700;
+  font-size: 15px;
+  transition: all 0.2s ease;
+}
+
+.controls button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* === LEYENDA DE COLORES === */
+.legend {
+  background: #f0f8ff;
+  border: 1px solid #b3e0ff;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.legend h4 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  color: #1a5fb4;
+  font-weight: 600;
+}
+
+.legend-items {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.color-box {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  display: inline-block;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.svg-wrap {
+  width: 100%;
+  overflow: visible;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  background: #f9f9f9;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.pieza-controls select {
+  width: 80%;
+  padding: 12px 14px;
+  font-size: 22px;
+  border: 1.5px solid #999;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.pieza-controls select:focus {
+  outline: none;
+  border-color: #4facfe;
+  box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.25);
+}
+
+.loading {
+  text-align: center;
+  padding: 50px;
+  color: #666;
+  font-style: italic;
+}
+
+/* === PROCEDIMIENTOS === */
+.procedimientos-section {
+  margin-top: 32px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 1px solid #dee2e6;
+}
+
+.filtro-categoria {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.filtro-categoria select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.lista-procedimientos {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  margin-bottom: 16px;
+}
+
+.procedimiento-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.procedimiento-item:last-child {
+  border-bottom: none;
+}
+
+.procedimiento-item .info {
+  flex: 1;
+}
+
+.procedimiento-item strong {
+  font-size: 15px;
+  display: block;
+}
+
+.procedimiento-item small {
+  color: #666;
+  font-size: 13px;
+}
+
+.btn-agregar {
+  background: #28a745;
+  color: white;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.tratamiento-seleccionado ul {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0;
+}
+
+.tratamiento-seleccionado li {
+  padding: 8px 12px;
+  background: #e9ecef;
+  margin-bottom: 6px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tratamiento-seleccionado li button {
+  background: #dc3545;
+  color: white;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.totales {
+  text-align: right;
+  font-size: 16px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #ddd;
+}
+
+/* === OBSERVACIONES === */
+.observaciones-section {
+  margin-top: 20px;
+}
+
+.observaciones-section h4 {
+  margin-bottom: 8px;
+  font-size: 16px;
+  color: #1a5fb4;
+  font-weight: 600;
+}
+
+.observaciones-section textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  resize: vertical;
+  font-size: 14px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.observaciones-section textarea:focus {
+  outline: none;
+  border-color: #4facfe;
+  box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.25);
+}
+
+.pdf-preview-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.pdf-preview-container {
+  background: white;
+  width: 90%;
+  max-width: 1000px;
+  height: 90vh;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.pdf-preview-header {
+  padding: 15px 20px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pdf-preview-header h5 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.pdf-iframe {
+  flex: 1;
+  border: none;
+}
+
+.pdf-preview-footer {
+  padding: 15px 20px;
+  background: #f8f9fa;
+  border-top: 1px solid #ddd;
+  text-align: right;
+  gap: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* === ESTILO DEL BOTÓN PERSONALIZADO === */
+.css-button-gradient--4 {
+  min-width: 130px;
+  height: 40px;
+  color: #fff;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  border-radius: 5px;
+  border: none;
+  background-size: 120% auto;
+  background-image: linear-gradient(315deg, #43cea2 0%, #185a9d 75%);
+}
+
+.css-button-gradient--4:hover {
+  background-position: right center;
+}
+
+.css-button-gradient--4:active {
+  top: 2px;
+}

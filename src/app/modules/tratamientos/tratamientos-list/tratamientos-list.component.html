@@ -1,0 +1,30 @@
+<div class="card fade-in">
+  <div class="card-header">
+    <h3>Lista de Tratamientos</h3>
+    <a routerLink="new" class="btn btn-success">Nuevo Tratamiento</a>
+  </div>
+  <div class="card-body">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Precio</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tratamiento of tratamientos">
+          <td>{{ tratamiento.idTratamiento }}</td>
+          <td>{{ tratamiento.nombre }}</td>
+          <td>{{ tratamiento.descripcion }}</td>
+          <td>{{ tratamiento.precio | currency }}</td>
+          <td>
+            <a routerLink="{{tratamiento.idTratamiento}}/edit" class="btn btn-primary btn-sm">Editar</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

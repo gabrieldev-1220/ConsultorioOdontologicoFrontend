@@ -1,0 +1,43 @@
+.ficha-container {
+  padding: 32px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 32px;
+  color: #333;
+}
+
+.tabs {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+button {
+  padding: 16px 32px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+button.active {
+  background-color: #007bff;
+  color: white;
+  box-shadow: 0 2px 6px rgba(0,123,255,0.3);
+}
+
+.tab-content {
+  padding: 32px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: white;
+  min-height: 900px;
+}
