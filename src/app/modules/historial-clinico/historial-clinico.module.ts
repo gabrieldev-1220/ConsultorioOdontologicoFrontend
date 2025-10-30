@@ -4,16 +4,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HistorialClinicoRoutingModule } from './historial-clinico-routing.module';
 import { HistorialListComponent } from './historial-list/historial-list.component';
-import { HistorialFormComponent } from './historial-form/historial-form.component';
 import { HistorialClinicoComponent } from './historial-clinico.component';
 import { SharedModule } from '../../shared/shared.module';
 import { HistorialClinicoService } from '../../core/services/historial-clinico.service';
-import { TruncatePipe } from '../../pipes/truncate.pipe'; // AÑADIDO
+import { TruncatePipe } from '../../pipes/truncate.pipe';
 
 @NgModule({
   declarations: [
     HistorialListComponent,
-    HistorialFormComponent,
     HistorialClinicoComponent
   ],
   imports: [
@@ -22,7 +20,7 @@ import { TruncatePipe } from '../../pipes/truncate.pipe'; // AÑADIDO
     RouterModule,
     HistorialClinicoRoutingModule,
     SharedModule,
-    TruncatePipe // AÑADIDO
+    TruncatePipe
   ],
   providers: [
     HistorialClinicoService

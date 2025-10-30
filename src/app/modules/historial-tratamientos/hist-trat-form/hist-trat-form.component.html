@@ -8,7 +8,7 @@
         <label>Historial Clínico</label>
         <select formControlName="idHistorial" class="form-control">
           <option *ngFor="let h of historiales" [value]="h.idHistorial">
-            {{ h.idHistorial }} - {{ h.fechaCreacion | date:'dd/MM/yyyy' }}
+            {{ h.idHistorial }} - {{ h.fecha | date:'dd/MM/yyyy' }}
           </option>
         </select>
       </div>

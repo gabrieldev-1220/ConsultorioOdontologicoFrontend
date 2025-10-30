@@ -18,7 +18,7 @@
         <tr *ngFor="let historial of historiales">
           <td>{{ historial.idHistorial }}</td>
           <td>{{ historial.idPaciente }}</td>
-          <td>{{ historial.fechaCreacion | date:'dd/MM/yyyy' }}</td>
+          <td>{{ historial.fecha | date:'dd/MM/yyyy' }}</td>
           <td>{{ historial.motivoConsulta }}</td>
           <td>
             <a routerLink="{{historial.idHistorial}}/edit" class="btn btn-primary btn-sm">Editar</a>

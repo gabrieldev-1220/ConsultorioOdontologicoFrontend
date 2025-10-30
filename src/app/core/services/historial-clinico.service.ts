@@ -14,23 +14,23 @@ export class HistorialClinicoService {
     return this.apiService.get<HistorialClinico[]>(`HistorialClinico/pacientes/${idPaciente}`);
   }
 
-  getPorId(idHistorial: number): Observable<HistorialClinico> {
-    return this.apiService.get<HistorialClinico>(`HistorialClinico/${idHistorial}`);
+  crearConArchivos(historial: HistorialClinico, archivos: File[]): Observable<HistorialClinico> {
+    const formData = new FormData();
+    formData.append('IdPaciente', historial.idPaciente.toString());
+    formData.append('IdOdontologo', historial.idOdontologo.toString());
+    formData.append('MotivoConsulta', historial.motivoConsulta);
+    formData.append('Diagnostico', historial.diagnostico);
+    formData.append('Observacion', historial.observacion || '');
+    formData.append('PlanTratamiento', historial.planTratamiento);
+
+    archivos.forEach((file, index) => {
+      formData.append(`archivos`, file, file.name);
+    });
+
+    return this.apiService.postForm<HistorialClinico>('HistorialClinico', formData);
   }
 
-  crear(historial: HistorialClinico): Observable<HistorialClinico> {
-    return this.apiService.post<HistorialClinico>('HistorialClinico', historial);
-  }
-
-  actualizar(idHistorial: number, historial: HistorialClinico): Observable<HistorialClinico> {
-    return this.apiService.put<HistorialClinico>(`HistorialClinico/${idHistorial}`, historial);
-  }
-
-  eliminar(idHistorial: number): Observable<void> {
-    return this.apiService.delete<void>(`HistorialClinico/${idHistorial}`);
-  }
-
-  agregarEvolucion(idHistorial: number, evolucion: any): Observable<any> {
-    return this.apiService.post<any>(`HistorialClinico/${idHistorial}/evolucion`, evolucion);
+  descargarPdf(id: number): Observable<Blob> {
+    return this.apiService.getBlob(`HistorialClinico/${id}/pdf`);
   }
 }
