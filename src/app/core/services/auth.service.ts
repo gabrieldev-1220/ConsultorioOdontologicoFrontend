@@ -53,7 +53,7 @@ export class AuthService {
   logout(): void {
     localStorage.clear();
     this.router.navigate(['/login']).then(() => {
-      window.location.reload(); // Forzar recarga para actualizar el estado visual
+      window.location.reload();
     });
     this.toastr.info('Has cerrado sesión exitosamente. ¡Hasta pronto!');
   }

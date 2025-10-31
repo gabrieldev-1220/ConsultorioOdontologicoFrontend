@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../../shared/services/api.service';
-import { ToastrService } from 'ngx-toastr';
-import { Paciente } from '../../../models/paciente.model';
-import { AuthService } from '../../../core/services/auth.service';
 import { Router } from '@angular/router';
+import { ApiService } from '../../../shared/services/api.service';
+import { Paciente } from '../../../models/paciente.model';
 
 @Component({
   selector: 'app-pacientes-list',
@@ -18,8 +16,6 @@ export class PacientesListComponent implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    private toastr: ToastrService,
-    private authService: AuthService,
     private router: Router
   ) {}
 
@@ -29,24 +25,22 @@ export class PacientesListComponent implements OnInit {
 
   loadPacientes() {
     this.apiService.get<Paciente[]>('Pacientes').subscribe({
-      next: (data: Paciente[]) => {
-        this.pacientes = Array.isArray(data) ? data : [];
-        this.filteredPacientes = [...this.pacientes];
+      next: (data) => {
+        this.pacientes = data;
+        this.filteredPacientes = data;
       },
-      error: (error) => {
-        console.error('Error al cargar pacientes:', error);
-        this.toastr.error('Acceso denegado: Rol insuficiente o error en el servidor');
-        this.pacientes = [];
-        this.filteredPacientes = [];
+      error: (err) => {
+        console.error(err);
       }
     });
   }
 
   onSearch() {
-    this.filteredPacientes = this.pacientes.filter(paciente =>
-      paciente.nombre.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-      paciente.apellido.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-      paciente.dni.toLowerCase().includes(this.searchQuery.toLowerCase())
+    const query = this.searchQuery.toLowerCase();
+    this.filteredPacientes = this.pacientes.filter(p =>
+      p.nombre.toLowerCase().includes(query) ||
+      p.apellido.toLowerCase().includes(query) ||
+      p.dni.includes(query)
     );
   }
 
@@ -55,6 +49,6 @@ export class PacientesListComponent implements OnInit {
   }
 
   viewFicha(id: number) {
-    this.router.navigate([`/pacientes/${id}`]); // Cambiado
+    this.router.navigate(['/pacientes', id]);
   }
 }

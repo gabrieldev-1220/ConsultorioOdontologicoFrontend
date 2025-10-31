@@ -2,11 +2,14 @@
   width: 250px;
   height: 100vh;
   position: fixed;
+  top: 0;
+  left: 0;
   background-color: var(--secondary);
   color: var(--white);
   transition: transform 0.3s ease;
   transform: translateX(0);
   z-index: 1000;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
 
   &.active {
     transform: translateX(-100%);
@@ -37,7 +40,7 @@
       .profile-info {
         h4 {
           margin: 0;
-          font-size: 1.3rem; /* Aumentado para mayor prominencia */
+          font-size: 1.3rem;
           font-weight: 700;
           color: var(--white);
           transition: color 0.3s ease;
@@ -48,8 +51,8 @@
 
         p {
           margin: 0;
-          font-size: 1rem; /* Aumentado para mejor legibilidad */
-          color: rgba(255, 255, 255, 0.9); /* Color más claro para contraste */
+          font-size: 1rem;
+          color: rgba(255, 255, 255, 0.9);
           font-weight: 500;
         }
       }

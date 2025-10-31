@@ -1,43 +1,77 @@
 .ficha-container {
-  padding: 32px;
-  max-width: 1600px;
-  margin: 0 auto;
-}
-
-h2 {
-  text-align: center;
-  margin-bottom: 32px;
-  color: #333;
-}
-
-.tabs {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 32px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-button {
-  padding: 16px 32px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  background-color: #f0f0f0;
-  font-weight: 600;
-  transition: all 0.2s;
-}
-
-button.active {
-  background-color: #007bff;
-  color: white;
-  box-shadow: 0 2px 6px rgba(0,123,255,0.3);
-}
-
-.tab-content {
-  padding: 32px;
-  border: 1px solid #ddd;
-  border-radius: 12px;
   background: white;
-  min-height: 900px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  margin: 20px 20px 40px 20px;
+  max-width: 100%;
+  overflow: hidden;
+
+  .header-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: #f8f9fa;
+
+    h2 {
+      margin: 0;
+      font-size: 1.6rem;
+      color: #2c3e50;
+      font-weight: 600;
+    }
+
+    .dni-tel {
+      font-size: 0.95rem;
+      color: #555;
+      font-weight: 500;
+      background: #e9ecef;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+  }
+
+  .tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 10;
+
+    button {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 25px;
+      background: #e9ecef;
+      color: #495057;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+
+      &.active {
+        background: #007bff;
+        color: white;
+        box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+      }
+
+      &:hover:not(.active) {
+        background: #dee2e6;
+        transform: translateY(-1px);
+      }
+    }
+  }
+
+  .tab-content {
+    background: white;
+    padding: 24px;
+    border-radius: 10px;
+    min-height: 400px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+    border: 1px solid #eee;
+  }
 }

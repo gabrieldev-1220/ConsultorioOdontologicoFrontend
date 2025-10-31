@@ -11,6 +11,7 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { HttpInterceptorService } from './core/interceptors/http-interceptor.service';
 
+
 @NgModule({
   declarations: [
     AppComponent
