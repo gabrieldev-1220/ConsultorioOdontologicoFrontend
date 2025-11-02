@@ -15,7 +15,7 @@ export class PacienteFichaComponent implements OnInit {
   pacienteId: number = 0;
   paciente: Paciente | null = null;
   historial: HistorialClinico[] = [];
-  selectedTab: string = 'historia-clinica';
+  selectedTab: string = 'contacto'; // ← Inicia en "Información"
 
   constructor(
     private route: ActivatedRoute,

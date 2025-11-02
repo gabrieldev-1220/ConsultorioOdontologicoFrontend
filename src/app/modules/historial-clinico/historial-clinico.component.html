@@ -33,9 +33,9 @@
   <div class="lista" *ngIf="historiales.length > 0; else noHistorial">
     <div *ngFor="let h of historiales" class="historial-card" (click)="abrirModal(h)">
       <div class="fecha-visita">
-        <strong>Fecha de visita:</strong> {{ h.fechaCreacion | date:'dd/MM/yyyy' }}
+        <strong>Fecha de visita:</strong> {{ h.fecha | date:'dd/MM/yyyy' }}
       </div>
-      <<div class="odontologo">Dr. {{ h.odontologo?.nombre }} {{ h.odontologo?.apellido }}</div>
+      <div class="odontologo">Dr. {{ h.odontologo?.nombre }} {{ h.odontologo?.apellido }}</div>
     </div>
   </div>
 
@@ -51,7 +51,7 @@
         <button class="btn-close" (click)="cerrarModal()">×</button>
       </div>
       <div class="modal-body">
-        <p><strong>Fecha:</strong> {{ historialSeleccionado.fechaCreacion | date:'dd/MM/yyyy' }}</p>
+        <p><strong>Fecha:</strong> {{ historialSeleccionado.fecha | date:'dd/MM/yyyy' }}</p>
         <p><strong>Motivo:</strong> {{ historialSeleccionado.motivoConsulta }}</p>
         <p><strong>Diagnóstico:</strong> {{ historialSeleccionado.diagnostico }}</p>
         <p><strong>Observación:</strong> {{ historialSeleccionado.observacion || 'Sin observación' }}</p>

@@ -1,0 +1,41 @@
+<div class="presupuesto-container">
+  <h3>Presupuesto del Paciente</h3>
+
+  <div *ngIf="presupuestos.length > 0; else noPresupuesto">
+    <table class="presupuesto-table">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Procedimiento</th>
+          <th>Cantidad</th>
+          <th>Precio Unitario</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of presupuestos">
+          <td>{{ item.fecha | date:'dd/MM/yyyy' }}</td>
+          <td>{{ item.nombreProcedimiento }}</td>
+          <td>{{ item.cantidad }}</td>
+          <td>{{ item.precioUnitario | currency:'USD':'symbol':'1.2-2' }}</td>
+          <td>{{ item.total | currency:'USD':'symbol':'1.2-2' }}</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr class="total-row">
+          <td colspan="4"><strong>Total Presupuesto</strong></td>
+          <td><strong>{{ totalPresupuesto | currency:'USD':'symbol':'1.2-2' }}</strong></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <ng-template #noPresupuesto>
+    <p class="empty">No hay presupuesto generado para este paciente.</p>
+  </ng-template>
+
+  <div class="actions">
+    <button class="btn-primary" (click)="generarNuevo()">Generar Nuevo Presupuesto</button>
+    <button class="btn-secondary" (click)="imprimir()">Imprimir</button>
+  </div>
+</div>

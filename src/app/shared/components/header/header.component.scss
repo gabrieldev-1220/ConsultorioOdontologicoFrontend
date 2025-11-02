@@ -8,12 +8,14 @@
   right: 0;
   z-index: 1000;
   background-color: var(--primary);
+  height: 70px; /* Altura fija para control preciso */
 
   .container-fluid {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-left: 270px; // Ajuste para el sidebar
+    height: 100%;
   }
 
   .header-left {
@@ -24,15 +26,15 @@
       width: 52px;
       height: auto;
       margin-right: 1rem;
-      object-fit: contain; // Asegurar que la imagen no se distorsione
+      object-fit: contain;
     }
 
     .navbar-brand {
       margin: 0;
-      font-size: 1.5rem; // Reducido para mejor ajuste
+      font-size: 1.5rem;
       font-weight: 700;
       color: var(--secondary);
-      white-space: nowrap; // Evitar que el texto se rompa
+      white-space: nowrap;
     }
   }
 
@@ -48,7 +50,9 @@
   }
 }
 
-// Ajustar el margen superior del contenido principal
-.dashboard-main {
-  margin-top: 60px; // Reducido para un header más compacto
+/* Ajuste global para todo el contenido debajo del header */
+.dashboard-main,
+.paciente-detail-container {
+  margin-top: 90px !important; /* Espacio seguro debajo del header */
+  padding-top: 20px;
 }

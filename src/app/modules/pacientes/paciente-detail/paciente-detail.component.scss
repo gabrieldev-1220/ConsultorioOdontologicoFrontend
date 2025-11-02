@@ -2,13 +2,26 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+  margin-top: -30px !important; /* Espacio justo debajo del header fijo (70px + 5px) */
 }
 
 .header {
   text-align: center;
-  margin-bottom: 20px;
-  padding-bottom: 10px;
+  margin: 0 0 20px 0;
+  padding: 16px 0 12px 0;
   border-bottom: 2px solid #185a9d;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border-radius: 12px 12px 0 0;
+  position: relative;
+  z-index: 100;
+}
+
+.header h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #185a9d;
+  font-weight: 600;
 }
 
 .tabs {
@@ -17,6 +30,8 @@
   margin-bottom: 20px;
   flex-wrap: wrap;
   justify-content: center;
+  position: relative;
+  z-index: 99;
 }
 
 .tabs button {
@@ -39,10 +54,17 @@
   color: white;
 }
 
+.tab-content {
+  position: relative;
+  z-index: 1;
+  margin-top: -12px;
+}
+
 .tab-content > div {
   background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  padding: 28px;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   min-height: 500px;
+  border-top: 1px solid #e3f2fd;
 }

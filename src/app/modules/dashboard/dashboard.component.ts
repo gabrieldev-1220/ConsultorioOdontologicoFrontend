@@ -87,7 +87,7 @@ export class DashboardComponent implements OnInit {
         next: (data: HistorialClinico[]) => {
           if (Array.isArray(data)) {
             this.stats.historialesHoy = data.filter(h => {
-              const fechaHistorial = new Date(h.fechaCreacion);
+              const fechaHistorial = new Date(h.fecha);
               return fechaHistorial.toDateString() === hoy.toDateString();
             }).length;
           } else {

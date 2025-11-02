@@ -1,20 +1,35 @@
 <div class="ficha-container">
-  <h2>Ficha de {{ paciente?.nombre }} {{ paciente?.apellido }}</h2>
+  <!-- TÍTULO: SOLO APELLIDO Y NOMBRE -->
+  <div class="header-info">
+    <h2>Ficha de {{ paciente?.apellido }}, {{ paciente?.nombre }}</h2>
+  </div>
 
+  <!-- PESTAÑAS (SIN CAMBIOS) -->
   <div class="tabs">
-    <button [class.active]="selectedTab === 'historia-clinica'" (click)="setTab('historia-clinica')">Historia Clínica</button>
+    <button [class.active]="selectedTab === 'contacto'" (click)="setTab('contacto')">Información</button>
     <button [class.active]="selectedTab === 'odontograma'" (click)="setTab('odontograma')">Odontograma</button>
+    <button [class.active]="selectedTab === 'historia-clinica'" (click)="setTab('historia-clinica')">Historia Clínica</button>
+    <button [class.active]="selectedTab === 'presupuesto'" (click)="setTab('presupuesto')">Presupuesto</button>
     <button [class.active]="selectedTab === 'prescripciones'" (click)="setTab('prescripciones')">Prescripciones / Recetas</button>
-    <button [class.active]="selectedTab === 'facturacion'" (click)="setTab('facturacion')">Facturación</button>
-    <button [class.active]="selectedTab === 'contacto'" (click)="setTab('contacto')">Contacto y Antecedentes</button>
   </div>
 
   <div class="tab-content" *ngIf="paciente">
+    <!-- TAB: Información (Contacto y Antecedentes) -->
+    <div *ngIf="selectedTab === 'contacto'">
+      <h3>Información del Paciente</h3>
+      <p><strong>DNI:</strong> {{ paciente.dni }}</p>
+      <p><strong>Teléfono:</strong> {{ paciente.telefono }}</p>
+      <p><strong>Email:</strong> {{ paciente.email }}</p>
+      <p><strong>Dirección:</strong> {{ paciente.direccion }}</p>
+      <p><strong>Fecha de Nacimiento:</strong> {{ paciente.fechaNacimiento | date:'dd/MM/yyyy' }}</p>
+      <p><strong>Activo:</strong> {{ paciente.activo ? 'Sí' : 'No' }}</p>
+    </div>
+
     <!-- TAB: Historia Clínica -->
     <div *ngIf="selectedTab === 'historia-clinica'">
       <h3>Historia Clínica</h3>
       <div *ngFor="let h of historial">
-        <p><strong>Fecha:</strong> {{ h.fechaCreacion | date:'dd/MM/yyyy' }}</p>
+        <p><strong>Fecha:</strong> {{ h.fecha | date:'dd/MM/yyyy' }}</p>
         <p><strong>Motivo:</strong> {{ h.motivoConsulta }}</p>
         <p><strong>Diagnóstico:</strong> {{ h.diagnostico }}</p>
       </div>
@@ -26,26 +41,16 @@
       <app-odontogram [pacienteId]="pacienteId"></app-odontogram>
     </div>
 
+    <!-- TAB: Presupuesto -->
+    <div *ngIf="selectedTab === 'presupuesto'">
+      <h3>Presupuesto</h3>
+      <app-presupuesto [pacienteId]="pacienteId"></app-presupuesto>
+    </div>
+
     <!-- TAB: Prescripciones -->
     <div *ngIf="selectedTab === 'prescripciones'">
       <h3>Prescripciones / Recetas</h3>
       <p>Funcionalidad en desarrollo. Pronto podrás agregar prescripciones.</p>
-    </div>
-
-    <!-- TAB: Facturación -->
-    <div *ngIf="selectedTab === 'facturacion'">
-      <h3>Facturación</h3>
-      <p>Funcionalidad en desarrollo. Pronto podrás ver los pagos del paciente.</p>
-    </div>
-
-    <!-- TAB: Contacto -->
-    <div *ngIf="selectedTab === 'contacto'">
-      <h3>Contacto y Antecedentes</h3>
-      <p><strong>Teléfono:</strong> {{ paciente.telefono }}</p>
-      <p><strong>Email:</strong> {{ paciente.email }}</p>
-      <p><strong>Dirección:</strong> {{ paciente.direccion }}</p>
-      <p><strong>Fecha de Nacimiento:</strong> {{ paciente.fechaNacimiento | date:'dd/MM/yyyy' }}</p>
-      <p><strong>Activo:</strong> {{ paciente.activo ? 'Sí' : 'No' }}</p>
     </div>
   </div>
 </div>

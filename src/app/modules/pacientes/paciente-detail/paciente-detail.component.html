@@ -1,7 +1,6 @@
 <div class="paciente-detail-container" *ngIf="paciente">
   <div class="header">
-    <h2>{{ paciente.nombre }} {{ paciente.apellido }}</h2>
-    <p>DNI: {{ paciente.dni }} | Tel: {{ paciente.telefono }}</p>
+    <h2>{{ paciente.apellido }}, {{ paciente.nombre }}</h2>
   </div>
 
   <div class="tabs">
@@ -14,6 +13,8 @@
   <div class="tab-content">
     <!-- INFO -->
     <div *ngIf="activeTab === 'info'">
+      <p><strong>DNI:</strong> {{ paciente.dni }}</p>
+      <p><strong>Teléfono:</strong> {{ paciente.telefono }}</p>
       <p><strong>Email:</strong> {{ paciente.email }}</p>
       <p><strong>Dirección:</strong> {{ paciente.direccion }}</p>
       <p><strong>Fecha Nacimiento:</strong> {{ paciente.fechaNacimiento | date:'dd/MM/yyyy' }}</p>
@@ -31,7 +32,7 @@
 
     <!-- PRESUPUESTO -->
     <div *ngIf="activeTab === 'presupuesto'">
-      <app-odontogram [pacienteId]="pacienteId"></app-odontogram>
+      <app-presupuesto [pacienteId]="pacienteId"></app-presupuesto>
     </div>
   </div>
 </div>

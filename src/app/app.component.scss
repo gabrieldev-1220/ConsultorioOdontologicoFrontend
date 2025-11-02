@@ -2,3 +2,9 @@
   display: block;
   min-height: 100vh;
 }
+
+/* Asegura que el contenido principal no quede debajo del header fijo */
+.container-fluid.mt-5 {
+  margin-top: 80px !important; /* Ajuste para header fijo de ~70px */
+  padding-top: 20px;
+}

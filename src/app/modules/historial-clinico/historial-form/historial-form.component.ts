@@ -1,89 +1,83 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { HistorialClinicoService } from '../../../core/services/historial-clinico.service';
+import { AuthService } from '../../../core/services/auth.service';
+import { InformacionMedicaService } from '../../../core/services/informacion-medica.service';
 import { HistorialClinico } from '../../../models/historial-clinico.model';
+import { InformacionMedica } from '../../../models/informacion-medica.model';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-historial-form',
-  standalone: false,
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './historial-form.component.html',
   styleUrls: ['./historial-form.component.scss']
 })
 export class HistorialFormComponent implements OnInit {
   pacienteId!: number;
-  historialId?: number;
-  historial!: HistorialClinico;
-  esNuevo = true;
+  idOdontologo!: number;
+  infoMedica: InformacionMedica | null = null;
+  archivos: File[] = [];
+  historial: HistorialClinico = {
+    idPaciente: 0,
+    idOdontologo: 0,
+    fecha: new Date().toISOString(),
+    motivoConsulta: '',
+    diagnostico: '',
+    observacion: '',
+    planTratamiento: ''
+  };
 
   constructor(
+    public authService: AuthService, // ← PUBLIC
     private route: ActivatedRoute,
     private router: Router,
     private historialService: HistorialClinicoService,
+    private infoMedicaService: InformacionMedicaService,
     private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
-    this.pacienteId = +this.route.snapshot.paramMap.get('pacienteId')!;
-    this.historialId = this.route.snapshot.paramMap.get('id') ? +this.route.snapshot.paramMap.get('id')! : undefined;
+    this.pacienteId = +this.route.snapshot.paramMap.get('id')!;
+    this.idOdontologo = +this.authService.getIdOdontologo()!;
+    this.historial.idPaciente = this.pacienteId;
+    this.historial.idOdontologo = this.idOdontologo;
 
-    this.esNuevo = !this.historialId;
-    this.iniciarHistorial();
-    if (!this.esNuevo) {
-      this.cargarHistorial();
-    }
-  }
-
-  iniciarHistorial() {
-    this.historial = {
-      idPaciente: this.pacienteId,
-      fechaCreacion: new Date().toISOString().split('T')[0],
-      motivoConsulta: '',
-      antecedentesMedicos: {},
-      antecedentesOdontologicos: '',
-      examenExtraoral: {},
-      examenIntraoral: {},
-      diagnostico: '',
-      planTratamiento: '',
-      evoluciones: [],
-      consentimientoInformado: false
-    };
-  }
-
-  cargarHistorial() {
-    this.historialService.getPorId(this.historialId!).subscribe({
-      next: (data) => this.historial = data,
-      error: () => this.toastr.error('Error al cargar historial')
+    this.infoMedicaService.getPorPaciente(this.pacienteId).subscribe({
+      next: (data: InformacionMedica) => this.infoMedica = data
     });
   }
 
-  guardar() {
-    const accion = this.esNuevo
-      ? this.historialService.crear(this.historial)
-      : this.historialService.actualizar(this.historialId!, this.historial);
+  onFileSelected(event: any) {
+    this.archivos = Array.from(event.target.files);
+  }
 
-    accion.subscribe({
-      next: () => {
-        this.toastr.success('Historial guardado');
-        this.volver();
+  getOdontologoNombre(): string {
+    return this.authService.getFullName() || 'Odontólogo';
+  }
+
+  getMatricula(): string {
+    return this.authService.getMatricula() || 'N/A';
+  }
+
+  guardar(crearCita: boolean = false) {
+    this.historialService.crearConArchivos(this.historial, this.archivos).subscribe({
+      next: (nuevo: HistorialClinico) => {
+        this.toastr.success('Historial creado con éxito');
+        if (crearCita) {
+          this.router.navigate(['/turnos/nuevo', this.pacienteId]);
+        } else {
+          this.router.navigate(['/pacientes']);
+        }
       },
       error: () => this.toastr.error('Error al guardar')
     });
   }
 
-  agregarEvolucion() {
-    this.historial.evoluciones.push({
-      fecha: new Date().toISOString().split('T')[0],
-      descripcion: '',
-      profesional: ''
-    });
-  }
-
-  eliminarEvolucion(index: number) {
-    this.historial.evoluciones.splice(index, 1);
-  }
-
-  volver() {
-    this.router.navigate(['/pacientes', this.pacienteId]);
+  cancelar() {
+    this.router.navigate(['/pacientes']);
   }
 }

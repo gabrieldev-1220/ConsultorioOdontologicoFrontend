@@ -1,1 +1,15 @@
-<p>pacientes works!</p>
+<div class="pacientes-container">
+  <div class="header">
+    <h2>Pacientes</h2>
+    <!-- BOTÓN SOLO PARA admin o recepcionista -->
+    <button 
+      *ngIf="authService.getRol() === 'admin' || authService.getRol() === 'recepcionista'"
+      class="btn-nuevo" 
+      routerLink="/pacientes/nuevo">
+      + Nuevo Paciente
+    </button>
+  </div>
+
+  <!-- LISTA DE PACIENTES (asumiendo que tienes un componente hijo o tabla) -->
+  <router-outlet></router-outlet>
+</div>
