@@ -1,0 +1,24 @@
+<div class="prescripciones-container">
+  <div class="header-section">
+    <h3>Prescripciones del Paciente</h3>
+    <button class="btn-nueva">+ Nueva Prescripción</button>
+  </div>
+
+  <div *ngIf="prescripciones.length > 0; else noData">
+    <div class="prescripcion-item" *ngFor="let p of prescripciones">
+      <div class="item-header">
+        <span class="fecha">{{ p.fecha | date:'dd/MM/yyyy' }}</span>
+        <span class="estado {{ p.estado }}">{{ p.estado }}</span>
+      </div>
+      <div class="item-body">
+        <p><strong>Medicamento:</strong> {{ p.medicamento }}</p>
+        <p><strong>Dosis:</strong> {{ p.dosis }}</p>
+        <p><strong>Duración:</strong> {{ p.duracion }}</p>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noData>
+    <p class="empty">No hay prescripciones registradas.</p>
+  </ng-template>
+</div>

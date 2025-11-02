@@ -1,1 +1,25 @@
-<p>tratamientos works!</p>
+<div class="tratamientos-container">
+  <div class="header-section">
+    <h2 class="page-title">Tratamientos Disponibles</h2>
+    <a routerLink="new" class="btn-nuevo">+ Nuevo Tratamiento</a>
+  </div>
+
+  <div class="tratamientos-grid" *ngIf="tratamientos.length > 0; else noData">
+    <div class="tratamiento-card" *ngFor="let t of tratamientos">
+      <div class="card-header">
+        <h3>{{ t.nombre }}</h3>
+        <span class="precio">{{ t.precio | currency:'USD':'symbol':'1.0-0' }}</span>
+      </div>
+      <div class="card-body">
+        <p>{{ t.descripcion }}</p>
+      </div>
+      <div class="card-footer">
+        <a [routerLink]="t.idTratamiento + '/edit'" class="btn-editar">Editar</a>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noData>
+    <p class="empty">No hay tratamientos registrados.</p>
+  </ng-template>
+</div>

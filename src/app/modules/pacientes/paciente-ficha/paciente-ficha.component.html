@@ -4,17 +4,18 @@
     <h2>Ficha de {{ paciente?.apellido }}, {{ paciente?.nombre }}</h2>
   </div>
 
-  <!-- PESTAÑAS (SIN CAMBIOS) -->
+  <!-- PESTAÑAS -->
   <div class="tabs">
     <button [class.active]="selectedTab === 'contacto'" (click)="setTab('contacto')">Información</button>
     <button [class.active]="selectedTab === 'odontograma'" (click)="setTab('odontograma')">Odontograma</button>
     <button [class.active]="selectedTab === 'historia-clinica'" (click)="setTab('historia-clinica')">Historia Clínica</button>
     <button [class.active]="selectedTab === 'presupuesto'" (click)="setTab('presupuesto')">Presupuesto</button>
     <button [class.active]="selectedTab === 'prescripciones'" (click)="setTab('prescripciones')">Prescripciones / Recetas</button>
+    <button [class.active]="selectedTab === 'facturacion'" (click)="setTab('facturacion')">Facturación</button>
   </div>
 
   <div class="tab-content" *ngIf="paciente">
-    <!-- TAB: Información (Contacto y Antecedentes) -->
+    <!-- TAB: Información -->
     <div *ngIf="selectedTab === 'contacto'">
       <h3>Información del Paciente</h3>
       <p><strong>DNI:</strong> {{ paciente.dni }}</p>
@@ -50,7 +51,13 @@
     <!-- TAB: Prescripciones -->
     <div *ngIf="selectedTab === 'prescripciones'">
       <h3>Prescripciones / Recetas</h3>
-      <p>Funcionalidad en desarrollo. Pronto podrás agregar prescripciones.</p>
+      <app-prescripciones [pacienteId]="pacienteId"></app-prescripciones>
+    </div>
+
+    <!-- TAB: Facturación -->
+    <div *ngIf="selectedTab === 'facturacion'">
+      <h3>Facturación</h3>
+      <app-facturacion [pacienteId]="pacienteId"></app-facturacion>
     </div>
   </div>
 </div>

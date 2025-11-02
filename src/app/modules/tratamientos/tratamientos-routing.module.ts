@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TratamientosListComponent } from './tratamientos-list/tratamientos-list.component';
+import { TratamientosComponent } from './tratamientos.component';
 import { TratamientosFormComponent } from './tratamientos-form/tratamientos-form.component';
 
 const routes: Routes = [
-  { path: '', component: TratamientosListComponent },
+  { path: '', component: TratamientosComponent },
   { path: 'new', component: TratamientosFormComponent },
   { path: ':id/edit', component: TratamientosFormComponent }
 ];

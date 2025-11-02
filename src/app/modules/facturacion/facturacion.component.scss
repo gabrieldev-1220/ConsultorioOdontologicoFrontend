@@ -1,0 +1,66 @@
+.facturacion-container {
+  padding: 24px;
+  background: #f8fdff;
+  border-radius: 16px;
+  border: 1px solid #e3f2fd;
+}
+
+.facturacion-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  margin-top: 16px;
+}
+
+.facturacion-table th {
+  background: linear-gradient(135deg, #185a9d 0%, #43cea2 100%);
+  color: white;
+  padding: 16px;
+  text-align: left;
+  font-weight: 600;
+}
+
+.facturacion-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #f0f7ff;
+}
+
+.facturacion-table tbody tr:hover {
+  background: #f5fbff;
+}
+
+.estado {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.estado.pagado {
+  background: #d4edda;
+  color: #155724;
+}
+
+.estado.pendiente {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.total {
+  background: #e3f2fd !important;
+  font-weight: 700;
+  color: #185a9d;
+}
+
+.empty {
+  text-align: center;
+  color: #90a4ae;
+  font-style: italic;
+  padding: 40px;
+  background: white;
+  border: 2px dashed #bbdefb;
+  border-radius: 12px;
+}
