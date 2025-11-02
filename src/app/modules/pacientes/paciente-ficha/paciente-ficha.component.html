@@ -27,13 +27,9 @@
     </div>
 
     <!-- TAB: Historia Clínica -->
+    <!-- HISTORIAL CLÍNICO -->
     <div *ngIf="selectedTab === 'historia-clinica'">
-      <h3>Historia Clínica</h3>
-      <div *ngFor="let h of historial">
-        <p><strong>Fecha:</strong> {{ h.fecha | date:'dd/MM/yyyy' }}</p>
-        <p><strong>Motivo:</strong> {{ h.motivoConsulta }}</p>
-        <p><strong>Diagnóstico:</strong> {{ h.diagnostico }}</p>
-      </div>
+      <app-historial-clinico [pacienteId]="pacienteId"></app-historial-clinico>
     </div>
 
     <!-- TAB: Odontograma -->
