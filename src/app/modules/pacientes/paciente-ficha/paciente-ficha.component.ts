@@ -5,6 +5,12 @@ import { ToastrService } from 'ngx-toastr';
 import { Paciente } from '../../../models/paciente.model';
 import { HistorialClinico } from '../../../models/historial-clinico.model';
 
+interface OdontogramaHistorial {
+  fecha: string;
+  odontologo: string;
+  procedimientos: string[];
+}
+
 @Component({
   selector: 'app-paciente-ficha',
   standalone: false,
@@ -16,6 +22,8 @@ export class PacienteFichaComponent implements OnInit {
   paciente: Paciente | null = null;
   historial: HistorialClinico[] = [];
   selectedTab: string = 'contacto';
+  mostrarHistorialOdontogramas = false;
+  odontogramasHistorial: OdontogramaHistorial[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -27,6 +35,7 @@ export class PacienteFichaComponent implements OnInit {
     this.pacienteId = +this.route.snapshot.paramMap.get('id')!;
     this.loadPaciente();
     this.loadHistorial();
+    this.loadHistorialOdontogramas();
   }
 
   loadPaciente() {
@@ -49,7 +58,28 @@ export class PacienteFichaComponent implements OnInit {
     });
   }
 
+  loadHistorialOdontogramas() {
+    // Simulación de datos (reemplazar con API real)
+    this.odontogramasHistorial = [
+      {
+        fecha: '2025-10-15',
+        odontologo: 'María Gómez',
+        procedimientos: ['Limpieza', 'Sellante']
+      },
+      {
+        fecha: '2025-08-20',
+        odontologo: 'Juan Pérez',
+        procedimientos: ['Extracción', 'Radiografía']
+      }
+    ];
+  }
+
   setTab(tab: string) {
     this.selectedTab = tab;
+  }
+
+  seleccionarOdontograma(odontograma: OdontogramaHistorial) {
+    this.toastr.info(`Odontograma del ${odontograma.fecha} por Dr. ${odontograma.odontologo}`);
+    // Aquí podrías abrir un modal con el odontograma completo
   }
 }

@@ -1,31 +1,24 @@
 <div class="facturacion-container">
-  <h3>Historial de Pagos</h3>
+  <div class="header-section">
+    <h3>Historial de Pagos</h3>
+    <button class="btn-imprimir" (click)="imprimirFactura()">Imprimir Factura</button>
+  </div>
 
-  <div *ngIf="pagos.length > 0; else noData">
-    <table class="facturacion-table">
-      <thead>
-        <tr>
-          <th>Fecha</th>
-          <th>Concepto</th>
-          <th>Monto</th>
-          <th>Estado</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let p of pagos">
-          <td>{{ p.fecha | date:'dd/MM/yyyy' }}</td>
-          <td>{{ p.concepto }}</td>
-          <td>{{ p.monto | currency:'USD':'symbol':'1.0-0' }}</td>
-          <td><span class="estado {{ p.estado }}">{{ p.estado }}</span></td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr class="total">
-          <td colspan="2"><strong>Total Pagado</strong></td>
-          <td colspan="2"><strong>{{ totalPagado | currency:'USD':'symbol':'1.0-0' }}</strong></td>
-        </tr>
-      </tfoot>
-    </table>
+  <div *ngIf="pagos.length > 0; else noData" class="pagos-grid">
+    <div class="pago-card" *ngFor="let p of pagos">
+      <div class="card-header">
+        <span class="fecha">{{ p.fecha | date:'dd/MM/yyyy' }}</span>
+        <span class="estado {{ p.estado }}">{{ p.estado }}</span>
+      </div>
+      <div class="card-body">
+        <p class="concepto">{{ p.concepto }}</p>
+        <p class="monto">{{ p.monto | currency:'USD':'symbol':'1.0-0' }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="total-resumen">
+    <strong>Total Pagado:</strong> {{ totalPagado | currency:'USD':'symbol':'1.0-0' }}
   </div>
 
   <ng-template #noData>

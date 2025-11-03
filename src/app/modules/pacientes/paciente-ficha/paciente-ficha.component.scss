@@ -1,43 +1,113 @@
-.ficha-container {
-  padding: 32px;
-  max-width: 1600px;
-  margin: 0 auto;
-}
-
-h2 {
-  text-align: center;
-  margin-bottom: 32px;
-  color: #333;
-}
-
-.tabs {
+.historial-header {
   display: flex;
-  gap: 16px;
-  margin-bottom: 32px;
-  flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
 }
 
-button {
-  padding: 16px 32px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  background-color: #f0f0f0;
-  font-weight: 600;
-  transition: all 0.2s;
-}
-
-button.active {
-  background-color: #007bff;
+.btn-historial-odontogramas {
+  background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
   color: white;
-  box-shadow: 0 2px 6px rgba(0,123,255,0.3);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.tab-content {
-  padding: 32px;
-  border: 1px solid #ddd;
-  border-radius: 12px;
+.btn-historial-odontogramas:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(24, 90, 157, 0.3);
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
   background: white;
-  min-height: 900px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.modal-header {
+  padding: 20px;
+  background: #185a9d;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h3 {
+  margin: 0;
+}
+
+.btn-cerrar {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.btn-cerrar:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+.modal-body {
+  padding: 20px;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.odontograma-item {
+  padding: 16px;
+  border: 1px solid #e3f2fd;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: #f8fdff;
+}
+
+.odontograma-item:hover {
+  background: #e3f2fd;
+  border-color: #185a9d;
+  transform: translateX(4px);
+}
+
+.odontograma-item .fecha {
+  font-weight: 600;
+  color: #185a9d;
+}
+
+.odontograma-item .odontologo {
+  font-size: 0.9rem;
+  color: #43cea2;
+  margin: 4px 0;
+}
+
+.odontograma-item .procedimientos {
+  font-size: 0.85rem;
+  color: #555;
+  font-style: italic;
 }

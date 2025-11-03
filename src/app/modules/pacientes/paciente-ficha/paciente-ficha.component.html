@@ -27,9 +27,32 @@
     </div>
 
     <!-- TAB: Historia Clínica -->
-    <!-- HISTORIAL CLÍNICO -->
     <div *ngIf="selectedTab === 'historia-clinica'">
+      <div class="historial-header">
+        <h3>Historia Clínica</h3>
+        <button class="btn-historial-odontogramas" (click)="mostrarHistorialOdontogramas = true">
+          Historial Odontogramas
+        </button>
+      </div>
       <app-historial-clinico [pacienteId]="pacienteId"></app-historial-clinico>
+
+      <!-- MODAL HISTORIAL ODONTOGRAMAS -->
+      <div class="modal-backdrop" *ngIf="mostrarHistorialOdontogramas" (click)="mostrarHistorialOdontogramas = false">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+          <div class="modal-header">
+            <h3>Historial de Odontogramas</h3>
+            <button class="btn-cerrar" (click)="mostrarHistorialOdontogramas = false">×</button>
+          </div>
+          <div class="modal-body">
+            <div class="odontograma-item" *ngFor="let o of odontogramasHistorial" (click)="seleccionarOdontograma(o)">
+              <div class="fecha">{{ o.fecha | date:'dd/MM/yyyy' }}</div>
+              <div class="odontologo">Dr. {{ o.odontologo }}</div>
+              <div class="procedimientos">{{ o.procedimientos.join(', ') }}</div>
+            </div>
+            <p class="empty" *ngIf="odontogramasHistorial.length === 0">No hay odontogramas registrados.</p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- TAB: Odontograma -->
