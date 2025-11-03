@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://tu-api-produccion.com/api/', // Cuando despliegues el backend en un servidor, reemplazar por la URL real que brinde el HOST.
+  apiUrl: 'https://coindental.runasp.net/api/', // Despliegues del backend en el host mosnterasp.net
   bypassAuth: false
 };
