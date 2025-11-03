@@ -22,38 +22,31 @@
 
   <div class="turnos-hoy" *ngIf="turnosHoy.length > 0">
     <h3>Turnos del día</h3>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Paciente</th>
-          <th>Odontólogo</th>
-          <th>Fecha</th>
-          <th>Hora</th>
-          <th>Estado</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let turno of turnosHoy">
-          <td>{{ turno.paciente }}</td>
-          <td>{{ turno.odontologo }}</td>
-          <td>{{ turno.fecha | date:'dd/MM/yyyy' }}</td>
-          <td>{{ turno.hora }}</td>
-          <td>
-            <span [ngClass]="{
-              'estado-pendiente': turno.estado === 'pendiente',
-              'estado-confirmado': turno.estado === 'confirmado',
-              'estado-realizado': turno.estado === 'realizado',
-              'estado-cancelado': turno.estado === 'cancelado'
-            }">
-              {{ turno.estado }}
-            </span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="turnos-cards">
+      <div class="turno-card" *ngFor="let turno of turnosHoy">
+        <div class="turno-header">
+          <span class="paciente">{{ turno.paciente.nombre }} {{ turno.paciente.apellido }}</span>
+          <span class="odontologo">Dr. {{ turno.odontologo.nombre }} {{ turno.odontologo.apellido }}</span>
+        </div>
+        <div class="turno-body">
+          <div class="fecha-hora">
+            <span class="fecha">{{ turno.fecha | date:'d MMM yyyy' }}</span>
+            <span class="hora">{{ turno.hora }}</span>
+          </div>
+          <div class="estado" [ngClass]="{
+            'estado-pendiente': turno.estado === 'pendiente',
+            'estado-confirmado': turno.estado === 'confirmado',
+            'estado-realizado': turno.estado === 'realizado',
+            'estado-cancelado': turno.estado === 'cancelado'
+          }">
+            {{ turno.estado | titlecase }}
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <p *ngIf="!stats.loading && turnosHoy.length === 0">
+  <p *ngIf="!stats.loading && turnosHoy.length === 0" class="sin-turnos">
     No hay turnos para el día de hoy.
   </p>
 </div>

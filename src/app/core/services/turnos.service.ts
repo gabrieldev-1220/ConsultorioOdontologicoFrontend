@@ -3,13 +3,26 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
+// Modelo REAL de lo que devuelve el backend
+export interface PacienteDto {
+  id: number;
+  nombre: string;
+  apellido: string;
+}
+
+export interface OdontologoDto {
+  id: number;
+  nombre: string;
+  apellido: string;
+}
+
 export interface Turno {
   id: number;
-  paciente: string;
-  odontologo: string;
+  paciente: PacienteDto;     // Objeto, no string
+  odontologo: OdontologoDto; // Objeto, no string
   fecha: string;
   hora: string;
-  estado: string;
+  estado: 'pendiente' | 'confirmado' | 'cancelado' | 'realizado';
 }
 
 @Injectable({
@@ -21,7 +34,6 @@ export class TurnosService {
   constructor(private http: HttpClient) {}
 
   getAgenda(startDate: Date, endDate: Date, idOdontologo?: number, token?: string): Observable<Turno[]> {
-    // Formatear fechas correctamente con zona horaria
     const startISO = new Date(startDate).toISOString();
     const endISO = new Date(endDate).toISOString();
 
