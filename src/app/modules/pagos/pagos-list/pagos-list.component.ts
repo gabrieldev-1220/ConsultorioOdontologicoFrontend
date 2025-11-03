@@ -19,12 +19,16 @@ export class PagosListComponent implements OnInit {
   }
 
   loadPagos() {
-    this.apiService.get<Pago[]>('Pagos').subscribe(
-      data => this.pagos = data,
-      error => {
+    this.apiService.get<Pago[]>('Pagos').subscribe({
+      next: (data) => {
+        this.pagos = data.sort((a, b) => 
+          new Date(b.fechaPago).getTime() - new Date(a.fechaPago).getTime()
+        );
+      },
+      error: (error) => {
         console.error('Error al cargar pagos:', error);
         this.toastr.error('Acceso denegado: Rol insuficiente o error en el servidor');
       }
-    );
+    });
   }
 }

@@ -1,0 +1,104 @@
+.pagos-container {
+  padding: 8px 0;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.pago-card {
+  background: white;
+  border: 1px solid #e3f2fd;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  padding: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.pago-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  border-color: #185a9d;
+}
+
+.pago-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.pago-id {
+  font-weight: 600;
+  color: #185a9d;
+  font-size: 0.9rem;
+}
+
+.pago-metodo {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.pago-metodo.tarjeta {
+  background: #e3f2fd;
+  color: #185a9d;
+}
+
+.pago-metodo.transferencia {
+  background: #e8f5e8;
+  color: #2e7d32;
+}
+
+.pago-metodo.efectivo {
+  background: #fff3e0;
+  color: #ef6c00;
+}
+
+.pago-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pago-monto {
+  font-weight: 700;
+  color: #1b5e20;
+  font-size: 1.1rem;
+}
+
+.pago-fecha {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.pago-actions {
+  margin-top: 8px;
+  text-align: right;
+}
+
+.btn-editar {
+  background: transparent;
+  color: #185a9d;
+  border: 1px solid #bbdefb;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-editar:hover {
+  background: #e3f2fd;
+  border-color: #185a9d;
+}
+
+.sin-pagos {
+  color: #999;
+  font-style: italic;
+  text-align: center;
+  padding: 16px;
+  font-size: 0.9rem;
+}

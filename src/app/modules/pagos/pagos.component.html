@@ -1,1 +1,23 @@
-<p>pagos works!</p>
+<div class="pagos-container" *ngIf="pagos.length > 0; else noPagos">
+  <div class="pago-card" *ngFor="let pago of pagos">
+    <div class="pago-header">
+      <span class="pago-id">#{{ pago.id }}</span>
+      <span class="pago-metodo" [class.tarjeta]="pago.metodo === 'tarjeta'"
+                           [class.transferencia]="pago.metodo === 'transferencia'"
+                           [class.efectivo]="pago.metodo === 'efectivo'">
+        {{ pago.metodo | titlecase }}
+      </span>
+    </div>
+    <div class="pago-body">
+      <div class="pago-monto">{{ pago.monto | currency:'USD':'symbol':'1.0-0' }}</div>
+      <div class="pago-fecha">{{ pago.fecha | date:'d MMM yyyy' }}</div>
+    </div>
+    <div class="pago-actions">
+      <button class="btn-editar" (click)="editarPago(pago)">Editar</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #noPagos>
+  <p class="sin-pagos">No hay pagos registrados.</p>
+</ng-template>

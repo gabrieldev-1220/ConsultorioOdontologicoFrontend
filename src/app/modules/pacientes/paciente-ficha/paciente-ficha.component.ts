@@ -59,19 +59,8 @@ export class PacienteFichaComponent implements OnInit {
   }
 
   loadHistorialOdontogramas() {
-    // Simulación de datos (reemplazar con API real)
-    this.odontogramasHistorial = [
-      {
-        fecha: '2025-10-15',
-        odontologo: 'María Gómez',
-        procedimientos: ['Limpieza', 'Sellante']
-      },
-      {
-        fecha: '2025-08-20',
-        odontologo: 'Juan Pérez',
-        procedimientos: ['Extracción', 'Radiografía']
-      }
-    ];
+    const saved = localStorage.getItem(`odontogramas_${this.pacienteId}`);
+    this.odontogramasHistorial = saved ? JSON.parse(saved) : [];
   }
 
   setTab(tab: string) {
@@ -80,6 +69,5 @@ export class PacienteFichaComponent implements OnInit {
 
   seleccionarOdontograma(odontograma: OdontogramaHistorial) {
     this.toastr.info(`Odontograma del ${odontograma.fecha} por Dr. ${odontograma.odontologo}`);
-    // Aquí podrías abrir un modal con el odontograma completo
   }
 }

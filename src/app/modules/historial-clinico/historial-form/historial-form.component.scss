@@ -1,7 +1,16 @@
 .form-container {
-  max-width: 900px;
+  padding: 32px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  max-width: 800px;
   margin: 0 auto;
-  padding: 20px;
+}
+
+.form-container h2 {
+  color: #185a9d;
+  margin-bottom: 24px;
+  font-weight: 600;
 }
 
 .form-group {
@@ -12,84 +21,115 @@
   display: block;
   margin-bottom: 8px;
   font-weight: 600;
-  color: #185a9d;
+  color: #2c3e50;
 }
 
-.form-group textarea,
-.form-group input {
+.form-group input,
+.form-group textarea {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ced4da;
-  border-radius: 6px;
-  font-size: 14px;
+  padding: 12px;
+  border: 1px solid #e3f2fd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #185a9d;
+  box-shadow: 0 0 0 3px rgba(24, 90, 157, 0.1);
 }
 
 .section {
-  background: #f8f9fa;
-  padding: 20px;
+  background: #f8fdff;
+  padding: 16px;
   border-radius: 12px;
   margin-bottom: 20px;
+  border: 1px solid #e3f2fd;
 }
 
 .section h3 {
-  margin-top: 0;
+  margin: 0 0 12px;
   color: #185a9d;
-  border-bottom: 1px solid #dee2e6;
-  padding-bottom: 8px;
+  font-size: 1.1rem;
 }
 
-.evolucion {
-  background: white;
-  padding: 12px;
-  border: 1px solid #dee2e6;
+.file-item {
+  background: #e3f2fd;
+  padding: 8px 12px;
   border-radius: 8px;
-  margin-bottom: 10px;
-  display: grid;
-  gap: 8px;
-  grid-template-columns: 150px 150px 1fr 30px;
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #185a9d;
 }
 
-.evolucion button {
-  background: #dc3545;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
+.profesional {
+  background: #f0f7ff;
+  padding: 16px;
+  border-radius: 12px;
+  margin: 20px 0;
+  border: 1px dashed #bbdefb;
 }
 
-.btn-agregar-evolucion {
-  background: #28a745;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
-  cursor: pointer;
+.profesional p {
+  margin: 8px 0;
+  font-weight: 600;
 }
 
 .actions {
   display: flex;
-  gap: 15px;
-  justify-content: center;
-  margin-top: 30px;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 32px;
 }
 
-.btn-guardar {
-  background: linear-gradient(315deg, #43cea2 0%, #185a9d 75%);
-  color: white;
-  padding: 12px 30px;
+.btn-cancel {
+  background: #e0e0e0;
+  color: #666;
   border: none;
-  border-radius: 8px;
-  font-weight: bold;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 600;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.btn-cancelar {
-  background: #6c757d;
+.btn-cancel:hover {
+  background: #d0d0d0;
+  transform: translateY(-2px);
+}
+
+.btn-save {
+  background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
   color: white;
-  padding: 12px 30px;
   border: none;
-  border-radius: 8px;
+  padding: 12px 28px;
+  border-radius: 12px;
+  font-weight: 600;
   cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(24, 90, 157, 0.3);
+}
+
+.btn-save:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(24, 90, 157, 0.4);
+}
+
+.btn-cita {
+  background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(255, 126, 95, 0.3);
+}
+
+.btn-cita:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 126, 95, 0.4);
 }

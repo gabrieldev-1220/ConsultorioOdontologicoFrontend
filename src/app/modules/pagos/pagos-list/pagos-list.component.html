@@ -1,32 +1,32 @@
-<div class="card fade-in">
-  <div class="card-header">
+<div class="pagos-container fade-in">
+  <div class="header">
     <h3>Lista de Pagos</h3>
     <a routerLink="new" class="btn btn-success">Nuevo Pago</a>
   </div>
-  <div class="card-body">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Paciente ID</th> <!-- Cambiado de "Paciente" a "Paciente ID" -->
-          <th>Fecha</th>
-          <th>Monto</th>
-          <th>Método</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let pago of pagos">
-          <td>{{ pago.idPago }}</td>
-          <td>{{ pago.idPaciente }}</td> <!-- Cambiado de pago.paciente?.nombre a pago.idPaciente -->
-          <td>{{ pago.fechaPago | date }}</td>
-          <td>{{ pago.monto | currency }}</td>
-          <td>{{ pago.metodoPago }}</td>
-          <td>
-            <a routerLink="{{pago.idPago}}/edit" class="btn btn-primary btn-sm">Editar</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+
+  <div class="cards-wrapper" *ngIf="pagos.length > 0; else noPagos">
+    <div class="pago-card" *ngFor="let pago of pagos">
+      <div class="pago-header">
+        <span class="pago-id">#{{ pago.idPago }}</span>
+        <span class="pago-metodo" 
+              [class.tarjeta]="pago.metodoPago === 'tarjeta'"
+              [class.transferencia]="pago.metodoPago === 'transferencia'"
+              [class.efectivo]="pago.metodoPago === 'efectivo'">
+          {{ pago.metodoPago | titlecase }}
+        </span>
+      </div>
+      <div class="pago-body">
+        <div class="pago-monto">{{ pago.monto | currency:'USD':'symbol':'1.0-0' }}</div>
+        <div class="pago-fecha">{{ pago.fechaPago | date:'d MMM yyyy' }}</div>
+      </div>
+      <div class="pago-footer">
+        <small class="paciente-id">Paciente ID: {{ pago.idPaciente }}</small>
+        <a routerLink="{{pago.idPago}}/edit" class="btn-editar">Editar</a>
+      </div>
+    </div>
   </div>
+
+  <ng-template #noPagos>
+    <p class="sin-pagos">No hay pagos registrados.</p>
+  </ng-template>
 </div>

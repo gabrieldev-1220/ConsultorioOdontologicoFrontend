@@ -1,4 +1,148 @@
-.table {
-  border-radius: 10px;
-  overflow: hidden;
+.pagos-container {
+  padding: 16px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #185a9d;
+}
+
+.btn-success {
+  background: #2e7d32;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.btn-success:hover {
+  background: #1b5e20;
+  transform: translateY(-1px);
+}
+
+.cards-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.pago-card {
+  background: white;
+  border: 1px solid #e3f2fd;
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.pago-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  border-color: #185a9d;
+}
+
+.pago-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.pago-id {
+  font-weight: 600;
+  color: #185a9d;
+  font-size: 0.95rem;
+}
+
+.pago-metodo {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.pago-metodo.tarjeta {
+  background: #e3f2fd;
+  color: #185a9d;
+}
+
+.pago-metodo.transferencia {
+  background: #e8f5e8;
+  color: #2e7d32;
+}
+
+.pago-metodo.efectivo {
+  background: #fff3e0;
+  color: #ef6c00;
+}
+
+.pago-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.pago-monto {
+  font-weight: 700;
+  color: #1b5e20;
+  font-size: 1.15rem;
+}
+
+.pago-fecha {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.pago-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.paciente-id {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+.btn-editar {
+  background: transparent;
+  color: #185a9d;
+  border: 1px solid #bbdefb;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btn-editar:hover {
+  background: #e3f2fd;
+  border-color: #185a9d;
+}
+
+.sin-pagos {
+  color: #999;
+  font-style: italic;
+  text-align: center;
+  padding: 32px 16px;
+  font-size: 1rem;
+  background: #f9f9f9;
+  border-radius: 12px;
+  border: 1px dashed #ddd;
 }

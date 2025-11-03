@@ -9,6 +9,7 @@ import { Paciente } from '../../../models/paciente.model';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { AuthService } from '../../../core/services/auth.service';
 
 interface ToothDisplay {
   pieza: PiezaDental;
@@ -66,17 +67,19 @@ export class OdontogramComponent implements OnInit, AfterViewInit {
 
   paciente: Paciente | null = null;
 
-  // Para previsualización
   pdfBlobUrl: SafeResourceUrl | null = null;
   pdfType: 'odontograma' | 'presupuesto' | null = null;
   private currentBlobUrl: string | null = null;
+
+  private hasResetOnLogin = false;
 
   constructor(
     private odontogramaService: OdontogramaService,
     private apiService: ApiService,
     private procedimientosService: ProcedimientosService,
     private toastr: ToastrService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -91,11 +94,30 @@ export class OdontogramComponent implements OnInit, AfterViewInit {
     }
 
     this.loadPaciente();
-    this.loadPiezas();
     this.loadProcedimientos();
+    this.loadPiezas();
   }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void {
+    // Forzamos el reinicio del gráfico SOLO después de que el SVG esté listo
+    setTimeout(() => {
+      this.reiniciarGraficoSiNuevoLogin();
+    }, 500);
+  }
+
+  private reiniciarGraficoSiNuevoLogin() {
+    if (this.hasResetOnLogin) return;
+
+    const lastLogin = localStorage.getItem('lastLogin');
+    const today = new Date().toDateString();
+
+    if (lastLogin !== today) {
+      localStorage.setItem('lastLogin', today);
+      this.resetView();
+      this.hasResetOnLogin = true;
+      this.toastr.info('Gráfico del odontograma reiniciado para nueva sesión.');
+    }
+  }
 
   private loadPaciente() {
     this.apiService.get<Paciente>(`Pacientes/${this.pacienteId}`).subscribe({
@@ -333,6 +355,7 @@ export class OdontogramComponent implements OnInit, AfterViewInit {
     this.odontogramaService.actualizarPorPaciente(this.pacienteId, payload as any).subscribe({
       next: () => {
         this.guardarPlanTratamiento();
+        this.guardarEnHistorialOdontogramas();
       },
       error: (err) => {
         console.error('Error al guardar odontograma', err);
@@ -340,6 +363,25 @@ export class OdontogramComponent implements OnInit, AfterViewInit {
         this.loading = false;
       }
     });
+  }
+
+  private guardarEnHistorialOdontogramas() {
+    const odontologo = this.authService.getFullName() || 'Odontólogo';
+    const procedimientos = this.procedimientosSeleccionados.map(p => p.nombre);
+    const nuevo = {
+      fecha: new Date().toISOString().split('T')[0],
+      odontologo,
+      procedimientos
+    };
+
+    let historial = JSON.parse(localStorage.getItem(`odontogramas_${this.pacienteId}`) || '[]');
+    historial.unshift(nuevo);
+    localStorage.setItem(`odontogramas_${this.pacienteId}`, JSON.stringify(historial));
+
+    this.toastr.success('Odontograma guardado y registrado en historial.');
+    this.procedimientosSeleccionados = [];
+    this.observaciones = '';
+    this.loading = false;
   }
 
   guardarPlanTratamiento() {
@@ -351,14 +393,10 @@ export class OdontogramComponent implements OnInit, AfterViewInit {
     this.apiService.post<void>(`PlanesTratamiento/${this.pacienteId}`, payload).subscribe({
       next: () => {
         this.toastr.success('Plan de tratamiento y observaciones guardados correctamente.');
-        this.procedimientosSeleccionados = [];
-        this.observaciones = '';
-        this.loading = false;
       },
       error: (err) => {
         console.error('Error al guardar plan de tratamiento', err);
         this.toastr.error('No se pudo guardar el plan de tratamiento.');
-        this.loading = false;
       }
     });
   }
@@ -367,7 +405,6 @@ export class OdontogramComponent implements OnInit, AfterViewInit {
     return new Date();
   }
 
-  // === LIMPIAR PREVIEW ANTES DE GENERAR ===
   private limpiarPreview() {
     if (this.currentBlobUrl) {
       URL.revokeObjectURL(this.currentBlobUrl);
@@ -381,7 +418,6 @@ export class OdontogramComponent implements OnInit, AfterViewInit {
     }
   }
 
-  // === PDF PRESUPUESTO (PREVISUALIZACIÓN) ===
   async generarPresupuestoPDF() {
     this.limpiarPreview();
 
@@ -478,7 +514,6 @@ export class OdontogramComponent implements OnInit, AfterViewInit {
     }
   }
 
-  // === PDF ODONTOGRAMA (PREVISUALIZACIÓN) ===
   async exportarOdontogramaPDF() {
     this.limpiarPreview();
 
@@ -589,7 +624,6 @@ export class OdontogramComponent implements OnInit, AfterViewInit {
     }
   }
 
-  // === DESCARGAR PDF ===
   descargarPDF() {
     if (!this.pdfBlobUrl || !this.pdfType || !this.paciente || !this.currentBlobUrl) return;
 
