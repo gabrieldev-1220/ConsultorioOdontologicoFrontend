@@ -51,6 +51,9 @@
           },
           "configurations": {
             "production": {
+              "outputPath": "consultorio-odontologico-frontend",
+              "optimization": true,
+              "baseHref": "/",
               "budgets": [
                 {
                   "type": "initial",
