@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://coindental.runasp.net/', // Despliegues del backend en el host mosnterasp.net
+  apiUrl: 'https://coindental.azurewebsites.net', // Despliegues del backend en el host
   bypassAuth: false
 };
