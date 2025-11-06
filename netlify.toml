@@ -1,6 +1,6 @@
 [build]
   command = "npm run build:prod"
-  publish = "dist/consultorio-odontologico-frontend"
+  publish = "dist/consultorio-odontologico-frontend/browser"
   base = ""
 
 [build.environment]
