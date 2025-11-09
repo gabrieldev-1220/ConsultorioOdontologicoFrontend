@@ -1,7 +1,9 @@
 <div class="card fade-in">
   <div class="card-header">
     <h3>Gestión de Odontólogos</h3>
-    <a routerLink="new" class="btn btn-success">Nuevo Odontólogo</a>
+    <a routerLink="new" class="btn btn-success btn-nuevo-odontologo">
+      <i class="fas fa-user-plus"></i> Nuevo Odontólogo
+    </a>
   </div>
   <div class="card-body">
     <div class="table-responsive">
@@ -24,8 +26,8 @@
             <td><span class="badge badge-matricula">{{ odontologo.matricula }}</span></td>
             <td>{{ odontologo.especialidad || 'General' }}</td>
             <td>
-              <a routerLink="{{odontologo.idOdontologo}}/edit" class="btn btn-primary btn-sm">
-                Editar
+              <a routerLink="{{odontologo.idOdontologo}}/edit" class="btn btn-primary btn-sm btn-editar">
+                <i class="fas fa-edit"></i> Editar
               </a>
             </td>
           </tr>

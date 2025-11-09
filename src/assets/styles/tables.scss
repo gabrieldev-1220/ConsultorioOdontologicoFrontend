@@ -3,6 +3,7 @@
   border-collapse: separate;
   border-spacing: 0 8px;
   margin: 0;
+
   thead th {
     background: var(--secondary);
     color: white;
@@ -13,20 +14,24 @@
     font-size: 0.85rem;
     letter-spacing: 0.5px;
   }
+
   tbody tr {
     background: white;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    transition: all 0.2s ease;
+    transition: box-shadow 0.2s ease;
+
     &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+      // ZOOM 100% ELIMINADO – SIN transform
     }
+
     td {
       padding: 16px;
       border: none;
       vertical-align: middle;
     }
   }
+
   .badge {
     padding: 4px 10px;
     border-radius: 20px;
@@ -34,6 +39,7 @@
     font-weight: 600;
     text-transform: uppercase;
   }
+
   .badge-id { background: #e3f2fd; color: #1976d2; }
   .badge-matricula { background: #f3e5f5; color: #7b1fa2; }
   .badge-admin { background: #ffebee; color: #c62828; }

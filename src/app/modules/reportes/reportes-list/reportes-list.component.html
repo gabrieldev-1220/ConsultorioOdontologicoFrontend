@@ -1,28 +1,102 @@
-<div class="card fade-in">
+<div class="card fade-in reportes-container">
   <div class="card-header">
-    <h3>Reportes del Sistema</h3>
+    <div class="header-content">
+      <h3>
+        <i class="fas fa-chart-line"></i> Reportes del Sistema
+      </h3>
+      <small class="text-muted">
+        <i class="fas fa-calendar-alt"></i> Actualizado al {{ today | date:'mediumDate' }}
+      </small>
+    </div>
   </div>
+
   <div class="card-body">
+    <!-- Estadísticas principales -->
     <div class="report-grid">
-      <div class="report-card">
+      <!-- Pacientes Nuevos -->
+      <div class="report-card animate-in" style="--delay: 0.1s;">
+        <div class="icon-wrapper bg-gradient-primary">
+          <i class="fas fa-user-plus"></i>
+        </div>
         <h4>Pacientes Nuevos</h4>
         <p class="report-value">{{ reporte.pacientesNuevos }}</p>
-        <small class="text-success">Este mes</small>
+        <div class="progress-bar">
+          <div class="progress-fill success" [style.width.%]="78"></div>
+        </div>
+        <small class="text-success">
+          <i class="fas fa-arrow-up"></i> +12% este mes
+        </small>
       </div>
-      <div class="report-card">
+
+      <!-- Ingresos -->
+      <div class="report-card animate-in" style="--delay: 0.2s;">
+        <div class="icon-wrapper bg-gradient-success">
+          <i class="fas fa-dollar-sign"></i>
+        </div>
         <h4>Ingresos Totales</h4>
         <p class="report-value">${{ reporte.ingresos | number:'1.0-0' }}</p>
-        <small class="text-success">+8% vs mes anterior</small>
+        <div class="progress-bar">
+          <div class="progress-fill success" [style.width.%]="85"></div>
+        </div>
+        <small class="text-success">
+          <i class="fas fa-arrow-up"></i> +8% vs mes anterior
+        </small>
       </div>
-      <div class="report-card">
+
+      <!-- Turnos Atendidos -->
+      <div class="report-card animate-in" style="--delay: 0.3s;">
+        <div class="icon-wrapper bg-gradient-info">
+          <i class="fas fa-calendar-check"></i>
+        </div>
         <h4>Turnos Atendidos</h4>
         <p class="report-value">{{ reporte.turnosAtendidos }}</p>
-        <small class="text-info">{{ reporte.ocupacion }} ocupación</small>
+        <div class="progress-bar">
+          <div class="progress-fill info" [style.width.%]="ocupacionValue"></div>
+        </div>
+        <small class="text-info">
+          <i class="fas fa-chart-pie"></i> {{ reporte.ocupacion }} ocupación
+        </small>
       </div>
-      <div class="report-card">
+
+      <!-- Tratamiento Top -->
+      <div class="report-card animate-in" style="--delay: 0.4s;">
+        <div class="icon-wrapper bg-gradient-accent">
+          <i class="fas fa-tooth"></i>
+        </div>
         <h4>Tratamiento Más Realizado</h4>
         <p class="report-value">{{ reporte.tratamientoTop }}</p>
+        <div class="progress-bar">
+          <div class="progress-fill accent" [style.width.%]="42"></div>
+        </div>
         <small>42% del total</small>
+      </div>
+    </div>
+
+    <!-- Gráfico resumen (simulado con barras) -->
+    <div class="chart-summary">
+      <h4 class="chart-title">Resumen Mensual</h4>
+      <div class="bar-chart">
+        <div class="bar-item">
+          <span class="bar-label">Pacientes</span>
+          <div class="bar-container">
+            <div class="bar-fill primary" [style.height.%]="78"></div>
+          </div>
+          <span class="bar-value">{{ reporte.pacientesNuevos }}</span>
+        </div>
+        <div class="bar-item">
+          <span class="bar-label">Ingresos</span>
+          <div class="bar-container">
+            <div class="bar-fill success" [style.height.%]="85"></div>
+          </div>
+          <span class="bar-value">${{ reporte.ingresos | number:'1.0-0' }}</span>
+        </div>
+        <div class="bar-item">
+          <span class="bar-label">Turnos</span>
+          <div class="bar-container">
+            <div class="bar-fill info" [style.height.%]="ocupacionValue"></div>
+          </div>
+          <span class="bar-value">{{ reporte.turnosAtendidos }}</span>
+        </div>
       </div>
     </div>
   </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ApiService } from '../../../shared/services/api.service';
 
 interface Reporte {
@@ -15,7 +15,7 @@ interface Reporte {
   templateUrl: './reportes-list.component.html',
   styleUrl: './reportes-list.component.scss'
 })
-export class ReportesListComponent implements OnInit {
+export class ReportesListComponent implements OnInit, AfterViewInit {
   reporte: Reporte = {
     pacientesNuevos: 0,
     ingresos: 0,
@@ -24,10 +24,37 @@ export class ReportesListComponent implements OnInit {
     ocupacion: '0%'
   };
 
+  today: Date = new Date();
+  ocupacionValue: number = 0;
+
   constructor(private apiService: ApiService) {}
 
   ngOnInit() {
     this.loadReportes();
+  }
+
+  ngAfterViewInit() {
+    // Animar barras de progreso y gráfico
+    setTimeout(() => {
+      this.triggerAnimations();
+    }, 100);
+  }
+
+  private triggerAnimations() {
+    const elements = document.querySelectorAll('.progress-fill, .bar-fill');
+    elements.forEach(el => {
+      const htmlEl = el as HTMLElement;
+      const width = htmlEl.style.width || '0%';
+      const height = htmlEl.style.height || '0%';
+      
+      htmlEl.style.width = '0%';
+      htmlEl.style.height = '0%';
+      
+      setTimeout(() => {
+        htmlEl.style.width = width;
+        htmlEl.style.height = height;
+      }, 50);
+    });
   }
 
   loadReportes() {
@@ -48,10 +75,11 @@ export class ReportesListComponent implements OnInit {
         : 0;
       this.reporte.turnosAtendidos = atendidos;
       const totalTurnos = Array.isArray(turnos) ? turnos.length : 1;
-      this.reporte.ocupacion = totalTurnos > 0 ? Math.round((atendidos / totalTurnos) * 100) + '%' : '0%';
+      const porcentaje = totalTurnos > 0 ? Math.round((atendidos / totalTurnos) * 100) : 0;
+      this.reporte.ocupacion = porcentaje + '%';
+      this.ocupacionValue = porcentaje;
     });
 
-    // Tratamiento más común (simulado)
     this.reporte.tratamientoTop = 'Limpieza Dental';
   }
 }

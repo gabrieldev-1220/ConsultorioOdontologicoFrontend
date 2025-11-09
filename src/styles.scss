@@ -1,5 +1,5 @@
 /* Estilos globales con paleta de colores y animaciones */
-@import 'assets/styles/tables';
+@use 'assets/styles/tables' as tables;
 
 :root {
   --primary: #ADD8E6; /* Azul claro */
@@ -74,7 +74,6 @@ body {
 /* Overlay para páginas con imágenes de fondo */
 .overlay {
   position: relative;
- 
   &::before {
     content: '';
     position: absolute;
@@ -85,7 +84,6 @@ body {
     background: rgba(0, 0, 0, 0.4);
     z-index: 1;
   }
- 
   > * {
     position: relative;
     z-index: 2;
@@ -181,4 +179,49 @@ body {
 /* Aseguro que el sidebar no interfiera */
 .sidebar {
   z-index: 1000;
+}
+
+/* Estilos adicionales para formularios */
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  flex: 1;
+  min-width: 200px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.btn-editar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, var(--primary), #9BCEDB);
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--secondary);
+  transition: all 0.3s ease;
+  text-decoration: none;
+
+  i {
+    font-size: 0.9rem;
+  }
+
+  &:hover {
+    background: linear-gradient(135deg, #9BCEDB, var(--primary));
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(173, 216, 230, 0.4);
+    color: var(--secondary);
+  }
 }

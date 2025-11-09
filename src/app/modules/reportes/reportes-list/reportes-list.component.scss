@@ -1,45 +1,269 @@
+.reportes-container {
+  .card-header {
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      width: 100%;
+
+      h3 {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: var(--secondary);
+        font-weight: 700;
+        font-size: 1.4rem;
+
+        i {
+          color: var(--primary);
+          font-size: 1.5rem;
+          text-shadow: 0 2px 4px rgba(173, 216, 230, 0.3);
+        }
+      }
+
+      small {
+        font-size: 0.9rem;
+        color: #555;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+
+        i {
+          color: var(--secondary1);
+        }
+      }
+    }
+  }
+}
+
 .report-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-  margin-top: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
+  margin-top: 24px;
 }
 
 .report-card {
   background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  padding: 28px 24px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
   text-align: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(173, 216, 230, 0.2);
+
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.6s ease forwards;
+  animation-delay: var(--delay, 0s);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary1), var(--accent-positive));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
 
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    transform: translateY(-12px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    border-color: var(--primary);
+
+    &::before {
+      opacity: 1;
+    }
+
+    .icon-wrapper {
+      transform: scale(1.2) rotate(5deg);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+  }
+
+  .icon-wrapper {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: white;
+    transition: all 0.4s ease;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+
+    &.bg-gradient-primary {
+      background: linear-gradient(135deg, var(--primary), #9BCEDB);
+    }
+    &.bg-gradient-success {
+      background: linear-gradient(135deg, var(--accent-positive), #0fa00f);
+    }
+    &.bg-gradient-info {
+      background: linear-gradient(135deg, var(--secondary1), #6ab7ff);
+    }
+    &.bg-gradient-accent {
+      background: linear-gradient(135deg, #00796B, #004d40);
+    }
   }
 
   h4 {
-    margin: 0 0 10px;
+    margin: 0 0 14px;
     color: var(--secondary);
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
   }
 
   .report-value {
-    font-size: 2.2rem;
-    font-weight: 700;
+    font-size: 2.8rem;
+    font-weight: 800;
     color: var(--primary);
-    margin: 8px 0;
+    margin: 12px 0;
     line-height: 1;
+    text-shadow: 0 3px 6px rgba(173, 216, 230, 0.4);
+  }
+
+  .progress-bar {
+    height: 8px;
+    background: #f0f0f0;
+    border-radius: 4px;
+    margin: 14px 0;
+    overflow: hidden;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 1.2s ease;
+      width: 0 !important;
+
+      &.success { background: linear-gradient(90deg, var(--accent-positive), #0fa00f); }
+      &.info { background: linear-gradient(90deg, var(--secondary1), #6ab7ff); }
+      &.accent { background: linear-gradient(90deg, #00796B, #004d40); }
+    }
   }
 
   small {
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #444;
+
+    i {
+      font-size: 0.9rem;
+    }
 
     &.text-success { color: #2e7d32; }
     &.text-info { color: #1976d2; }
+  }
+}
+
+// Gráfico de barras
+.chart-summary {
+  margin-top: 40px;
+  padding: 24px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+
+  .chart-title {
+    margin: 0 0 20px;
+    color: var(--secondary);
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .bar-chart {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    gap: 20px;
+    height: 180px;
+    padding: 0 10px;
+  }
+
+  .bar-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    max-width: 100px;
+  }
+
+  .bar-label {
+    font-size: 0.85rem;
+    color: #555;
+    font-weight: 500;
+  }
+
+  .bar-container {
+    width: 100%;
+    height: 120px;
+    background: #f5f5f5;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+  }
+
+  .bar-fill {
+    width: 100%;
+    background: var(--primary);
+    border-radius: 8px;
+    transition: height 1.5s ease;
+    position: absolute;
+    bottom: 0;
+    height: 0;
+
+    &.primary { background: linear-gradient(to top, var(--primary), #9BCEDB); }
+    &.success { background: linear-gradient(to top, var(--accent-positive), #0fa00f); }
+    &.info { background: linear-gradient(to top, var(--secondary1), #6ab7ff); }
+  }
+
+  .bar-value {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--secondary);
+    margin-top: 4px;
+  }
+}
+
+// Animaciones
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Forzar animación de barras
+.animate-in .progress-fill,
+.bar-fill {
+  animation: fillBar 1.5s ease forwards;
+  animation-delay: calc(var(--delay, 0s) + 0.5s);
+}
+
+@keyframes fillBar {
+  to {
+    height: var(--target-height, 0);
+    width: 100% !important;
   }
 }
