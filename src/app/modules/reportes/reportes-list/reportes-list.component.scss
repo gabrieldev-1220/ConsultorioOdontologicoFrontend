@@ -7,7 +7,6 @@
       flex-wrap: wrap;
       gap: 12px;
       width: 100%;
-
       h3 {
         margin: 0;
         display: flex;
@@ -16,21 +15,18 @@
         color: var(--secondary);
         font-weight: 700;
         font-size: 1.4rem;
-
         i {
           color: var(--primary);
           font-size: 1.5rem;
           text-shadow: 0 2px 4px rgba(173, 216, 230, 0.3);
         }
       }
-
       small {
         font-size: 0.9rem;
         color: #555;
         display: flex;
         align-items: center;
         gap: 6px;
-
         i {
           color: var(--secondary1);
         }
@@ -56,7 +52,6 @@
   position: relative;
   overflow: hidden;
   border: 1px solid rgba(173, 216, 230, 0.2);
-
   opacity: 0;
   transform: translateY(30px);
   animation: fadeInUp 0.6s ease forwards;
@@ -78,76 +73,27 @@
     transform: translateY(-12px);
     box-shadow: 0 20px 40px rgba(0,0,0,0.15);
     border-color: var(--primary);
-
-    &::before {
-      opacity: 1;
-    }
-
-    .icon-wrapper {
-      transform: scale(1.2) rotate(5deg);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    }
+    &::before { opacity: 1; }
+    .icon-wrapper { transform: scale(1.2) rotate(5deg); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
   }
 
   .icon-wrapper {
-    width: 70px;
-    height: 70px;
-    margin: 0 auto 18px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.8rem;
-    color: white;
-    transition: all 0.4s ease;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-
-    &.bg-gradient-primary {
-      background: linear-gradient(135deg, var(--primary), #9BCEDB);
-    }
-    &.bg-gradient-success {
-      background: linear-gradient(135deg, var(--accent-positive), #0fa00f);
-    }
-    &.bg-gradient-info {
-      background: linear-gradient(135deg, var(--secondary1), #6ab7ff);
-    }
-    &.bg-gradient-accent {
-      background: linear-gradient(135deg, #00796B, #004d40);
-    }
+    width: 70px; height: 70px; margin: 0 auto 18px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: white;
+    transition: all 0.4s ease; box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    &.bg-gradient-primary { background: linear-gradient(135deg, var(--primary), #9BCEDB); }
+    &.bg-gradient-success { background: linear-gradient(135deg, var(--accent-positive), #0fa00f); }
+    &.bg-gradient-info { background: linear-gradient(135deg, var(--secondary1), #6ab7ff); }
+    &.bg-gradient-accent { background: linear-gradient(135deg, #00796B, #004d40); }
   }
 
-  h4 {
-    margin: 0 0 14px;
-    color: var(--secondary);
-    font-size: 1.1rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  .report-value {
-    font-size: 2.8rem;
-    font-weight: 800;
-    color: var(--primary);
-    margin: 12px 0;
-    line-height: 1;
-    text-shadow: 0 3px 6px rgba(173, 216, 230, 0.4);
-  }
+  h4 { margin: 0 0 14px; color: var(--secondary); font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+  .report-value { font-size: 2.8rem; font-weight: 800; color: var(--primary); margin: 12px 0; line-height: 1; text-shadow: 0 3px 6px rgba(173, 216, 230, 0.4); }
 
   .progress-bar {
-    height: 8px;
-    background: #f0f0f0;
-    border-radius: 4px;
-    margin: 14px 0;
-    overflow: hidden;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-
+    height: 8px; background: #f0f0f0; border-radius: 4px; margin: 14px 0; overflow: hidden; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
     .progress-fill {
-      height: 100%;
-      border-radius: 4px;
-      transition: width 1.2s ease;
-      width: 0 !important;
-
+      height: 100%; border-radius: 4px; transition: width 1.2s ease; width: 0 !important;
       &.success { background: linear-gradient(90deg, var(--accent-positive), #0fa00f); }
       &.info { background: linear-gradient(90deg, var(--secondary1), #6ab7ff); }
       &.accent { background: linear-gradient(90deg, #00796B, #004d40); }
@@ -155,21 +101,37 @@
   }
 
   small {
-    font-size: 0.95rem;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    color: #444;
-
-    i {
-      font-size: 0.9rem;
-    }
-
+    font-size: 0.95rem; font-weight: 500; display: flex; align-items: center; justify-content: center; gap: 8px; color: #444;
+    i { font-size: 0.9rem; }
     &.text-success { color: #2e7d32; }
     &.text-info { color: #1976d2; }
   }
+}
+
+// TABLA MODERNA
+.table-container {
+  margin-top: 40px;
+  .table-title {
+    margin: 0 0 16px;
+    color: var(--secondary);
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  &.success { background: #e8f5e8; color: #2e7d32; }
+  &.info { background: #e3f2fd; color: #1976d2; }
+  &.accent { background: #e0f2f1; color: #00695c; }
 }
 
 // Gráfico de barras
@@ -179,7 +141,6 @@
   background: white;
   border-radius: 16px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.06);
-
   .chart-title {
     margin: 0 0 20px;
     color: var(--secondary);
@@ -189,7 +150,6 @@
     text-transform: uppercase;
     letter-spacing: 1px;
   }
-
   .bar-chart {
     display: flex;
     justify-content: space-around;
@@ -198,7 +158,6 @@
     height: 180px;
     padding: 0 10px;
   }
-
   .bar-item {
     display: flex;
     flex-direction: column;
@@ -207,13 +166,11 @@
     flex: 1;
     max-width: 100px;
   }
-
   .bar-label {
     font-size: 0.85rem;
     color: #555;
     font-weight: 500;
   }
-
   .bar-container {
     width: 100%;
     height: 120px;
@@ -223,7 +180,6 @@
     position: relative;
     box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
   }
-
   .bar-fill {
     width: 100%;
     background: var(--primary);
@@ -232,12 +188,10 @@
     position: absolute;
     bottom: 0;
     height: 0;
-
     &.primary { background: linear-gradient(to top, var(--primary), #9BCEDB); }
     &.success { background: linear-gradient(to top, var(--accent-positive), #0fa00f); }
     &.info { background: linear-gradient(to top, var(--secondary1), #6ab7ff); }
   }
-
   .bar-value {
     font-size: 0.9rem;
     font-weight: 600;
@@ -248,13 +202,9 @@
 
 // Animaciones
 @keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-// Forzar animación de barras
 .animate-in .progress-fill,
 .bar-fill {
   animation: fillBar 1.5s ease forwards;
@@ -262,8 +212,5 @@
 }
 
 @keyframes fillBar {
-  to {
-    height: var(--target-height, 0);
-    width: 100% !important;
-  }
+  to { height: var(--target-height, 0); width: 100% !important; }
 }

@@ -7,20 +7,16 @@
   transition: transform 0.3s ease;
   transform: translateX(0);
   z-index: 1000;
-
   &.active {
     transform: translateX(-100%);
   }
-
   .sidebar-header {
     padding: 1.5rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-
     .profile-section {
       display: flex;
       align-items: center;
       gap: 1rem;
-
       .avatar {
         width: 60px;
         height: 60px;
@@ -28,16 +24,14 @@
         object-fit: cover;
         border: 2px solid var(--accent-positive);
         transition: transform 0.3s ease;
-
         &:hover {
           transform: scale(1.1);
         }
       }
-
       .profile-info {
         h4 {
           margin: 0;
-          font-size: 1.3rem; /* Aumentado para mayor prominencia */
+          font-size: 1.3rem;
           font-weight: 700;
           color: var(--white);
           transition: color 0.3s ease;
@@ -45,22 +39,19 @@
             color: var(--primary);
           }
         }
-
         p {
           margin: 0;
-          font-size: 1rem; /* Aumentado para mejor legibilidad */
-          color: rgba(255, 255, 255, 0.9); /* Color más claro para contraste */
+          font-size: 1rem;
+          color: rgba(255, 255, 255, 0.9);
           font-weight: 500;
         }
       }
     }
   }
-
   .sidebar-menu {
     list-style: none;
     padding: 0;
     margin: 1rem 0;
-
     .menu-item {
       a {
         display: flex;
@@ -70,22 +61,37 @@
         text-decoration: none;
         transition: all 0.3s ease;
         border-radius: 5px;
-
+        position: relative;
         &:hover {
           background-color: rgba(255, 255, 255, 0.2);
           color: var(--white);
           transform: translateX(5px);
         }
-
         &.active {
-          background-color: var(--primary);
+          background: linear-gradient(135deg, var(--primary), #9BCEDB);
           color: var(--secondary);
           font-weight: 600;
+          box-shadow: 0 4px 12px rgba(0, 0, 139, 0.3);
+          &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--accent-positive);
+            border-radius: 0 4px 4px 0;
+          }
         }
-
         span {
           flex: 1;
           font-size: 1.1rem;
+        }
+        i {
+          margin-right: 12px;
+          font-size: 1.2rem;
+          width: 20px;
+          text-align: center;
         }
       }
     }

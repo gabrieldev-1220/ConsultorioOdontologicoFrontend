@@ -72,7 +72,45 @@
       </div>
     </div>
 
-    <!-- Gráfico resumen (simulado con barras) -->
+    <!-- TABLA DE DETALLE MODERNA -->
+    <div class="table-container">
+      <h4 class="table-title">Detalles del Mes</h4>
+      <div class="table-responsive">
+        <table class="table table-modern">
+          <thead>
+            <tr>
+              <th>Métrica</th>
+              <th>Valor</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Pacientes Nuevos</strong></td>
+              <td><span class="badge badge-create">{{ reporte.pacientesNuevos }}</span></td>
+              <td><span class="status success"><i class="fas fa-arrow-up"></i> +12%</span></td>
+            </tr>
+            <tr>
+              <td><strong>Ingresos Totales</strong></td>
+              <td><span class="badge badge-update">${{ reporte.ingresos | number:'1.0-0' }}</span></td>
+              <td><span class="status success"><i class="fas fa-arrow-up"></i> +8%</span></td>
+            </tr>
+            <tr>
+              <td><strong>Turnos Atendidos</strong></td>
+              <td><span class="badge badge-login">{{ reporte.turnosAtendidos }}</span></td>
+              <td><span class="status info"><i class="fas fa-chart-pie"></i> {{ reporte.ocupacion }}</span></td>
+            </tr>
+            <tr>
+              <td><strong>Tratamiento Top</strong></td>
+              <td><span class="badge badge-odontologo">{{ reporte.tratamientoTop }}</span></td>
+              <td><span class="status accent">42% del total</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Gráfico resumen -->
     <div class="chart-summary">
       <h4 class="chart-title">Resumen Mensual</h4>
       <div class="bar-chart">

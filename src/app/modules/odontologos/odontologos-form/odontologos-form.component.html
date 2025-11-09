@@ -1,6 +1,8 @@
-<div class="card fade-in">
+<div class="card fade-in odontologo-form">
   <div class="card-header">
-    <h3>{{ id ? 'Editar Odontólogo' : 'Nuevo Odontólogo' }}</h3>
+    <h3>
+      <i class="fas fa-user-md"></i> {{ id ? 'Editar Odontólogo' : 'Nuevo Odontólogo' }}
+    </h3>
   </div>
   <div class="card-body">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">

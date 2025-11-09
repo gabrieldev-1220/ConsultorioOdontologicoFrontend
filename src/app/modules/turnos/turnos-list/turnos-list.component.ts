@@ -39,12 +39,9 @@ export class TurnosListComponent implements OnInit {
       return;
     }
 
-    const ahora = new Date();
-    const startDate = new Date(ahora.getFullYear(), ahora.getMonth(), ahora.getDate(), 0, 0, 0).toISOString();
-    const endDate = new Date(ahora.getFullYear(), ahora.getMonth(), ahora.getDate() + 1, 0, 0, 0).toISOString();
-
+    // CORREGIDO: Parámetros correctos → endpoint, params?, handleErrorLocally
     this.apiService
-      .get<Turno[]>(`Turnos/agenda?startDate=${startDate}&endDate=${endDate}&idOdontologo=${idOdontologo}`, true)
+      .get<Turno[]>(`Turnos/odontologo/${idOdontologo}`, undefined, true)
       .subscribe(
         data => {
           this.turnos = Array.isArray(data) ? data : [];
@@ -62,8 +59,11 @@ export class TurnosListComponent implements OnInit {
   }
 
   loadPacientes() {
-    this.apiService.get<Paciente[]>('Pacientes', true).subscribe(
-      (pacientes) => { this.pacientes = Array.isArray(pacientes) ? pacientes : []; },
+    // CORREGIDO: Parámetros correctos
+    this.apiService.get<Paciente[]>('Pacientes', undefined, true).subscribe(
+      (pacientes) => { 
+        this.pacientes = Array.isArray(pacientes) ? pacientes : []; 
+      },
       (error) => {
         console.error('Error cargando pacientes:', error);
         this.pacientes = [];
@@ -75,5 +75,10 @@ export class TurnosListComponent implements OnInit {
   getPacienteName(idPaciente: number): string {
     const paciente = this.pacientes.find(p => p.idPaciente === idPaciente);
     return paciente ? `${paciente.nombre} ${paciente.apellido}` : 'Paciente no encontrado';
+  }
+
+  // FUNCIÓN AGREGADA: Para mostrar nombre del odontólogo (opcional)
+  getOdontologoName(idOdontologo: number): string {
+    return `Odontólogo #${idOdontologo}`;
   }
 }

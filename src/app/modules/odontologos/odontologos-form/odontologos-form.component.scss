@@ -1,0 +1,111 @@
+.odontologo-form {
+  .card-header {
+    background: linear-gradient(135deg, var(--primary), #9BCEDB);
+    color: var(--secondary);
+    padding: 1.5rem;
+    border-radius: 16px 16px 0 0;
+    h3 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      i {
+        font-size: 1.8rem;
+        color: var(--secondary);
+      }
+    }
+  }
+
+  .card-body {
+    padding: 2rem;
+    background: white;
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  }
+
+  .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group {
+    flex: 1;
+    min-width: 250px;
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--secondary);
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: #fafafa;
+
+      &:focus {
+        border-color: var(--primary);
+        background: white;
+        box-shadow: 0 0 0 3px rgba(173, 216, 230, 0.3);
+        outline: none;
+      }
+
+      &::placeholder {
+        color: #aaa;
+      }
+    }
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    justify-content: flex-end;
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.75rem 1.5rem;
+      font-weight: 600;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+
+      i { font-size: 1.1rem; }
+
+      &.btn-success {
+        background: linear-gradient(135deg, var(--accent-positive), #0fa00f);
+        color: white;
+        border: none;
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 16px rgba(20, 195, 20, 0.3);
+        }
+      }
+
+      &.btn-secondary-outline {
+        background: transparent;
+        border: 2px solid var(--primary);
+        color: var(--primary);
+        &:hover {
+          background: var(--primary);
+          color: white;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 16px rgba(173, 216, 230, 0.4);
+        }
+      }
+    }
+  }
+}

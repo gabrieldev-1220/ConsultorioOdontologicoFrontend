@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TurnosComponent } from './turnos.component';
+import { TurnosListComponent } from './turnos-list/turnos-list.component';
+import { TurnosFormComponent } from './turnos-form/turnos-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -16,7 +18,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
-  declarations: [TurnosComponent],
+  declarations: [
+    TurnosComponent,
+    TurnosListComponent,
+    TurnosFormComponent
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,

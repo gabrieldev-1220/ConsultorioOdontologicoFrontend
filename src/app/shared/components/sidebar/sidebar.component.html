@@ -8,57 +8,54 @@
       </div>
     </div>
   </div>
-
   <ul class="sidebar-menu">
     <!-- MÓDULOS COMUNES PARA ODONTÓLOGO Y ADMIN -->
-    <li class="menu-item" *ngIf="rol === 'odontologo' || rol === 'admin'" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-      <a routerLink="/dashboard">
+    <li class="menu-item" *ngIf="rol === 'odontologo' || rol === 'admin'">
+      <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
         <span>Inicio</span>
       </a>
     </li>
-    <li class="menu-item" *ngIf="rol === 'odontologo' || rol === 'admin'" routerLinkActive="active">
-      <a routerLink="/pacientes">
+    <li class="menu-item" *ngIf="rol === 'odontologo' || rol === 'admin'">
+      <a routerLink="/pacientes" routerLinkActive="active">
         <span>Pacientes</span>
       </a>
     </li>
-    <li class="menu-item" *ngIf="rol === 'odontologo' || rol === 'admin'" routerLinkActive="active">
-      <a routerLink="/turnos">
+    <li class="menu-item" *ngIf="rol === 'odontologo' || rol === 'admin'">
+      <a routerLink="/turnos" routerLinkActive="active">
         <span>Citas / Turnos</span>
       </a>
     </li>
-    <li class="menu-item" *ngIf="rol === 'odontologo' || rol === 'admin'" routerLinkActive="active">
-      <a routerLink="/pagos">
+    <li class="menu-item" *ngIf="rol === 'odontologo' || rol === 'admin'">
+      <a routerLink="/pagos" routerLinkActive="active">
         <span>Facturación / Pagos</span>
       </a>
     </li>
-    <li class="menu-item" *ngIf="rol === 'odontologo' || rol === 'admin'" routerLinkActive="active">
-      <a routerLink="/tratamientos">
+    <li class="menu-item" *ngIf="rol === 'odontologo' || rol === 'admin'">
+      <a routerLink="/tratamientos" routerLinkActive="active">
         <span>Tratamientos</span>
       </a>
     </li>
-
     <!-- MÓDULOS EXCLUSIVOS PARA ADMIN -->
-    <li class="menu-item" *ngIf="rol === 'admin'" routerLinkActive="active">
-      <a routerLink="/usuarios">
+    <li class="menu-item" *ngIf="rol === 'admin'">
+      <a routerLink="/usuarios" routerLinkActive="active">
         <span>Usuarios y Roles</span>
       </a>
     </li>
-    <li class="menu-item" *ngIf="rol === 'admin'" routerLinkActive="active">
-      <a routerLink="/odontologos">
+    <li class="menu-item" *ngIf="rol === 'admin'">
+      <a routerLink="/odontologos" routerLinkActive="active">
         <span>Gestión Odontólogos</span>
       </a>
     </li>
-    <li class="menu-item" *ngIf="rol === 'admin'" routerLinkActive="active">
-      <a routerLink="/bitacora">
+    <li class="menu-item" *ngIf="rol === 'admin'">
+      <a routerLink="/bitacora" routerLinkActive="active">
         <span>Bitácora</span>
       </a>
     </li>
-    <li class="menu-item" *ngIf="rol === 'admin'" routerLinkActive="active">
-      <a routerLink="/reportes">
+    <li class="menu-item" *ngIf="rol === 'admin'">
+      <a routerLink="/reportes" routerLinkActive="active">
         <span>Reportes</span>
       </a>
     </li>
-
     <!-- CERRAR SESIÓN -->
     <li class="menu-item" (click)="logout()">
       <a>
