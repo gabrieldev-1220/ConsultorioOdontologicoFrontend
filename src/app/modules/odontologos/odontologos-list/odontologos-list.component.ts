@@ -5,7 +5,7 @@ import { Odontologo } from '../../../models/odontologo.model';
 
 @Component({
   selector: 'app-odontologos-list',
-  standalone:false,
+  standalone: false,
   templateUrl: './odontologos-list.component.html',
   styleUrls: ['./odontologos-list.component.scss']
 })
@@ -19,6 +19,14 @@ export class OdontologosListComponent implements OnInit {
   }
 
   loadOdontologos() {
-    this.apiService.get<Odontologo[]>('Odontologos').subscribe(data => this.odontologos = data, error => this.toastr.error('Error al cargar odontólogos'));
+    this.apiService.get<Odontologo[]>('Odontologo').subscribe({
+      next: (data) => {
+        this.odontologos = data || [];
+      },
+      error: () => {
+        this.toastr.error('Error al cargar odontólogos');
+        this.odontologos = [];
+      }
+    });
   }
 }

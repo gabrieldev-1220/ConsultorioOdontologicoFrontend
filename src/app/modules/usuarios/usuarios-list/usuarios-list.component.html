@@ -4,27 +4,37 @@
     <a routerLink="new" class="btn btn-success">Nuevo Usuario</a>
   </div>
   <div class="card-body">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Username</th>
-          <th>Rol</th>
-          <th>Odontólogo ID</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let usuario of usuarios">
-          <td>{{ usuario.idUsuario }}</td>
-          <td>{{ usuario.username }}</td>
-          <td>{{ usuario.rol }}</td>
-          <td>{{ usuario.idOdontologo }}</td>
-          <td>
-            <a routerLink="{{usuario.idUsuario}}/edit" class="btn btn-primary btn-sm">Editar</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-responsive">
+      <table class="table table-modern">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Rol</th>
+            <th>Odontólogo ID</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let usuario of usuarios">
+            <td><span class="badge badge-id">{{ usuario.idUsuario }}</span></td>
+            <td><strong>{{ usuario.username }}</strong></td>
+            <td>
+              <span class="badge" [ngClass]="{
+                'badge-admin': usuario.rol === 'admin',
+                'badge-odontologo': usuario.rol === 'odontologo',
+                'badge-recepcionista': usuario.rol === 'recepcionista'
+              }">{{ usuario.rol | titlecase }}</span>
+            </td>
+            <td>{{ usuario.idOdontologo || '-' }}</td>
+            <td>
+              <a routerLink="{{usuario.idUsuario}}/edit" class="btn btn-primary btn-sm">
+                Editar
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

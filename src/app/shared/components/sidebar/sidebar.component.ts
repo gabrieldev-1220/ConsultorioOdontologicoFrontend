@@ -10,12 +10,19 @@ import { Router } from '@angular/router';
 })
 export class SidebarComponent implements OnInit {
   sidebarActive: boolean = true;
+  rol: string = '';
 
   constructor(public authService: AuthService, private router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.rol = this.authService.getRol();
+  }
 
   logout() {
     this.authService.logout();
+  }
+
+  toggleSidebar() {
+    this.sidebarActive = !this.sidebarActive;
   }
 }

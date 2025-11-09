@@ -1,4 +1,6 @@
 /* Estilos globales con paleta de colores y animaciones */
+@import 'assets/styles/tables';
+
 :root {
   --primary: #ADD8E6; /* Azul claro */
   --secondary: #00008B; /* Azul oscuro */
@@ -72,7 +74,7 @@ body {
 /* Overlay para páginas con imágenes de fondo */
 .overlay {
   position: relative;
-  
+ 
   &::before {
     content: '';
     position: absolute;
@@ -83,7 +85,7 @@ body {
     background: rgba(0, 0, 0, 0.4);
     z-index: 1;
   }
-  
+ 
   > * {
     position: relative;
     z-index: 2;
@@ -102,32 +104,26 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 1001;
-
   &.show {
     display: flex;
   }
-
   .modal-content {
     background-color: var(--white);
     padding: 2rem;
     border-radius: 10px;
     width: 400px;
     box-shadow: var(--shadow);
-
     h2 {
       color: var(--secondary);
       margin-bottom: 1.5rem;
     }
-
     .form-group {
       margin-bottom: 1rem;
-
       label {
         color: var(--secondary);
         display: block;
         margin-bottom: 0.5rem;
       }
-
       .form-control {
         width: 100%;
         padding: 0.5rem;
@@ -136,7 +132,6 @@ body {
         color: var(--text-primary);
       }
     }
-
     .btn-primary {
       background-color: var(--primary);
       border-color: var(--secondary);
@@ -145,7 +140,6 @@ body {
         background-color: #9BCEDB;
       }
     }
-
     .btn-secondary-outline {
       background-color: transparent;
       border: 2px solid var(--primary);
@@ -170,17 +164,14 @@ body {
   padding: 10px 15px !important;
   color: #333 !important;
   font-family: 'Roboto', sans-serif !important;
-
   &.toast-success {
     background-color: var(--accent-positive) !important;
     color: var(--white) !important;
   }
-
   &.toast-error {
     background-color: var(--accent-negative) !important;
     color: var(--white) !important;
   }
-
   &.toast-info {
     background-color: var(--primary) !important;
     color: var(--secondary) !important;

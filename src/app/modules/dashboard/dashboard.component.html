@@ -1,6 +1,5 @@
 <div class="dashboard-container">
   <h2>Bienvenido, {{ username }}</h2>
-
   <div class="stats-cards" *ngIf="!stats.loading; else loadingTpl">
     <div class="card">
       <h3>Pacientes totales</h3>
@@ -15,11 +14,9 @@
       <p>{{ stats.historialesHoy }}</p>
     </div>
   </div>
-
   <ng-template #loadingTpl>
     <p>Cargando datos...</p>
   </ng-template>
-
   <div class="turnos-hoy" *ngIf="turnosHoy.length > 0">
     <h3>Turnos del día</h3>
     <div class="turnos-cards">
@@ -45,7 +42,6 @@
       </div>
     </div>
   </div>
-
   <p *ngIf="!stats.loading && turnosHoy.length === 0" class="sin-turnos">
     No hay turnos para el día de hoy.
   </p>

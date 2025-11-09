@@ -1,1 +1,39 @@
-<p>odontologos-list works!</p>
+<div class="card fade-in">
+  <div class="card-header">
+    <h3>Gestión de Odontólogos</h3>
+    <a routerLink="new" class="btn btn-success">Nuevo Odontólogo</a>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-modern">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Matrícula</th>
+            <th>Especialidad</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let odontologo of odontologos">
+            <td><span class="badge badge-id">{{ odontologo.idOdontologo }}</span></td>
+            <td><strong>{{ odontologo.nombre }}</strong></td>
+            <td>{{ odontologo.apellido }}</td>
+            <td><span class="badge badge-matricula">{{ odontologo.matricula }}</span></td>
+            <td>{{ odontologo.especialidad || 'General' }}</td>
+            <td>
+              <a routerLink="{{odontologo.idOdontologo}}/edit" class="btn btn-primary btn-sm">
+                Editar
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p *ngIf="odontologos.length === 0" class="text-center text-muted">
+        No hay odontólogos registrados.
+      </p>
+    </div>
+  </div>
+</div>

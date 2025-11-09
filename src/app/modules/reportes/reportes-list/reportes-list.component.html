@@ -1,0 +1,29 @@
+<div class="card fade-in">
+  <div class="card-header">
+    <h3>Reportes del Sistema</h3>
+  </div>
+  <div class="card-body">
+    <div class="report-grid">
+      <div class="report-card">
+        <h4>Pacientes Nuevos</h4>
+        <p class="report-value">{{ reporte.pacientesNuevos }}</p>
+        <small class="text-success">Este mes</small>
+      </div>
+      <div class="report-card">
+        <h4>Ingresos Totales</h4>
+        <p class="report-value">${{ reporte.ingresos | number:'1.0-0' }}</p>
+        <small class="text-success">+8% vs mes anterior</small>
+      </div>
+      <div class="report-card">
+        <h4>Turnos Atendidos</h4>
+        <p class="report-value">{{ reporte.turnosAtendidos }}</p>
+        <small class="text-info">{{ reporte.ocupacion }} ocupación</small>
+      </div>
+      <div class="report-card">
+        <h4>Tratamiento Más Realizado</h4>
+        <p class="report-value">{{ reporte.tratamientoTop }}</p>
+        <small>42% del total</small>
+      </div>
+    </div>
+  </div>
+</div>
