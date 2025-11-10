@@ -7,16 +7,14 @@
       <i class="fas fa-clock"></i> Todos los turnos registrados
     </small>
   </div>
-
   <div class="card-body">
     <div *ngIf="loading" class="loading text-center">
       <i class="fas fa-spinner fa-spin"></i> Cargando turnos...
     </div>
-
     <div *ngIf="!loading && noDataMessage" class="no-data text-center text-muted">
-      {{ noDataMessage }}
+      <i class="fas fa-calendar-times"></i>
+      <p>{{ noDataMessage }}</p>
     </div>
-
     <div class="turnos-grid" *ngIf="!loading && turnos.length > 0">
       <div class="turno-card animate-in" *ngFor="let turno of turnos; let i = index" style="--delay: {{ (i * 0.1) + 's' }};">
         <div class="turno-header">
@@ -32,7 +30,6 @@
             {{ turno.estado | titlecase }}
           </span>
         </div>
-
         <div class="turno-body">
           <p class="paciente-name">
             <i class="fas fa-user"></i>

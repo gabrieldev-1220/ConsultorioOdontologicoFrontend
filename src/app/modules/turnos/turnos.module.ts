@@ -4,7 +4,6 @@ import { TurnosComponent } from './turnos.component';
 import { TurnosListComponent } from './turnos-list/turnos-list.component';
 import { TurnosFormComponent } from './turnos-form/turnos-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 
 // Angular Material
 import { MatTableModule } from '@angular/material/table';
@@ -16,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,6 @@ import { MatNativeDateModule } from '@angular/material/core';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    HttpClientModule,
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,
@@ -35,8 +34,12 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatIconModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatCardModule
   ],
-  exports: [TurnosComponent]
+  exports: [
+    TurnosComponent,
+    TurnosListComponent // AGREGADO: Necesario para usarlo en rutas
+  ]
 })
 export class TurnosModule {}

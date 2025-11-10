@@ -39,7 +39,6 @@ export class TurnosListComponent implements OnInit {
       return;
     }
 
-    // CORREGIDO: Parámetros correctos → endpoint, params?, handleErrorLocally
     this.apiService
       .get<Turno[]>(`Turnos/odontologo/${idOdontologo}`, undefined, true)
       .subscribe(
@@ -59,10 +58,9 @@ export class TurnosListComponent implements OnInit {
   }
 
   loadPacientes() {
-    // CORREGIDO: Parámetros correctos
     this.apiService.get<Paciente[]>('Pacientes', undefined, true).subscribe(
-      (pacientes) => { 
-        this.pacientes = Array.isArray(pacientes) ? pacientes : []; 
+      (pacientes) => {
+        this.pacientes = Array.isArray(pacientes) ? pacientes : [];
       },
       (error) => {
         console.error('Error cargando pacientes:', error);
@@ -77,7 +75,6 @@ export class TurnosListComponent implements OnInit {
     return paciente ? `${paciente.nombre} ${paciente.apellido}` : 'Paciente no encontrado';
   }
 
-  // FUNCIÓN AGREGADA: Para mostrar nombre del odontólogo (opcional)
   getOdontologoName(idOdontologo: number): string {
     return `Odontólogo #${idOdontologo}`;
   }
