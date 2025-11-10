@@ -41,7 +41,9 @@ export class DashboardComponent implements OnInit {
     this.rol = this.authService.getRol();
     this.username = this.authService.getFullName() || 'Odontólogo Desconocido';
     this.loadDashboardData();
-    if (this.rol === 'odontologo') {
+
+    // CAMBIO: Carga turnos si es odontologo O admin
+    if (this.rol === 'odontologo' || this.rol === 'admin') {
       this.loadTurnosHoy();
       this.loadPacientes();
     }
