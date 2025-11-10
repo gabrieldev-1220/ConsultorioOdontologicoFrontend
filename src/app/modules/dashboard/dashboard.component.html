@@ -17,13 +17,15 @@
   <ng-template #loadingTpl>
     <p>Cargando datos...</p>
   </ng-template>
-  <div class="turnos-hoy" *ngIf="turnosHoy.length > 0">
+
+  <!-- TURNOS DEL DÍA -->
+  <div class="turnos-hoy" *ngIf="!stats.loading && turnosHoy.length > 0">
     <h3>Turnos del día</h3>
     <div class="turnos-cards">
-      <div class="turno-card" *ngFor="let turno of turnosHoy">
+      <div class="turno-card" *ngFor="let turno of turnosHoy; let i = index" style="--delay: {{ (i * 0.1) + 's' }};">
         <div class="turno-header">
           <span class="paciente">{{ turno.paciente.nombre }} {{ turno.paciente.apellido }}</span>
-          <span class="odontologo">Dr. {{ turno.odontologo.nombre }} {{ turno.odontologo.apellido }}</span>
+          <span class="odontologo">{{ getOdontologoName(turno.odontologo) }}</span>
         </div>
         <div class="turno-body">
           <div class="fecha-hora">
@@ -42,6 +44,7 @@
       </div>
     </div>
   </div>
+
   <p *ngIf="!stats.loading && turnosHoy.length === 0" class="sin-turnos">
     No hay turnos para el día de hoy.
   </p>

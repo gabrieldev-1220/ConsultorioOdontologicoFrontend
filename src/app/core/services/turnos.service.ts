@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
-// Modelo REAL de lo que devuelve el backend
 export interface PacienteDto {
   id: number;
   nombre: string;
@@ -18,8 +17,8 @@ export interface OdontologoDto {
 
 export interface Turno {
   id: number;
-  paciente: PacienteDto;     // Objeto, no string
-  odontologo: OdontologoDto; // Objeto, no string
+  paciente: PacienteDto;
+  odontologo: OdontologoDto;
   fecha: string;
   hora: string;
   estado: 'pendiente' | 'confirmado' | 'cancelado' | 'realizado';
@@ -36,19 +35,15 @@ export class TurnosService {
   getAgenda(startDate: Date, endDate: Date, idOdontologo?: number, token?: string): Observable<Turno[]> {
     const startISO = new Date(startDate).toISOString();
     const endISO = new Date(endDate).toISOString();
-
     let params = new HttpParams()
       .set('startDate', startISO)
       .set('endDate', endISO);
-
     if (idOdontologo) {
       params = params.set('idOdontologo', idOdontologo.toString());
     }
-
     const headers = token
       ? new HttpHeaders({ 'Authorization': `Bearer ${token}` })
       : undefined;
-
     return this.http.get<Turno[]>(`${this.apiUrl}/agenda`, { params, headers });
   }
 }

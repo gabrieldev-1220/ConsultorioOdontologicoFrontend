@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service';
 import { ApiService } from '../../shared/services/api.service';
+import { TurnosService, Turno } from '../../core/services/turnos.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Paciente } from '../../models/paciente.model';
-import { TurnosService, Turno as TurnoServiceModel } from '../../core/services/turnos.service';
-import { HistorialClinico } from '../../models/historial-clinico.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,7 +25,7 @@ export class DashboardComponent implements OnInit {
     loading: true
   };
 
-  turnosHoy: TurnoServiceModel[] = [];
+  turnosHoy: Turno[] = [];
   pacientes: Paciente[] = [];
   today: Date = new Date();
 
@@ -42,7 +41,6 @@ export class DashboardComponent implements OnInit {
     this.rol = this.authService.getRol();
     this.username = this.authService.getFullName() || 'Odontólogo Desconocido';
     this.loadDashboardData();
-
     if (this.rol === 'odontologo') {
       this.loadTurnosHoy();
       this.loadPacientes();
@@ -52,7 +50,7 @@ export class DashboardComponent implements OnInit {
   loadDashboardData() {
     this.stats.loading = true;
 
-    // Pacientes
+    // Pacientes totales
     this.apiService.get<Paciente[]>('Pacientes').subscribe({
       next: (data: Paciente[]) => {
         this.stats.pacientesTotal = Array.isArray(data) ? data.length : 0;
@@ -68,23 +66,27 @@ export class DashboardComponent implements OnInit {
     const inicioDia = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate(), 0, 0, 0);
     const finDia = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate() + 1, 0, 0, 0);
     const idOdontologo = this.authService.getIdOdontologo();
+    const token = this.authService.getToken();
 
-    // Turnos del día
-    if (idOdontologo) {
-      this.turnosService.getAgenda(inicioDia, finDia, +idOdontologo).subscribe({
-        next: (data: TurnoServiceModel[]) => {
+    // Turnos hoy (contador)
+    if (idOdontologo && token) {
+      this.turnosService.getAgenda(inicioDia, finDia, +idOdontologo, token).subscribe({
+        next: (data: Turno[]) => {
           this.stats.turnosHoy = Array.isArray(data) ? data.length : 0;
         },
-        error: () => { this.stats.turnosHoy = 0; }
+        error: (err) => {
+          console.error('Error al cargar turnos para contador:', err);
+          this.stats.turnosHoy = 0;
+        }
       });
     } else {
       this.stats.turnosHoy = 0;
     }
 
-    // Historiales
+    // Historiales hoy
     if (this.rol === 'admin' || this.rol === 'odontologo') {
-      this.apiService.get<HistorialClinico[]>('HistorialClinico').subscribe({
-        next: (data: HistorialClinico[]) => {
+      this.apiService.get<any[]>('HistorialClinico').subscribe({
+        next: (data: any[]) => {
           if (Array.isArray(data)) {
             this.stats.historialesHoy = data.filter(h => {
               const fechaHistorial = new Date(h.fecha);
@@ -106,19 +108,24 @@ export class DashboardComponent implements OnInit {
     const inicioDia = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate(), 0, 0, 0);
     const finDia = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate() + 1, 0, 0, 0);
     const idOdontologo = this.authService.getIdOdontologo();
+    const token = this.authService.getToken();
 
-    if (idOdontologo) {
-      this.turnosService.getAgenda(inicioDia, finDia, +idOdontologo).subscribe({
-        next: (data: TurnoServiceModel[]) => {
+    if (idOdontologo && token) {
+      this.turnosService.getAgenda(inicioDia, finDia, +idOdontologo, token).subscribe({
+        next: (data: Turno[]) => {
           this.turnosHoy = Array.isArray(data)
             ? data.sort((a, b) => {
-                const dateA = new Date(`${a.fecha}T${a.hora}`);
-                const dateB = new Date(`${b.fecha}T${b.hora}`);
-                return dateA.getTime() - dateB.getTime();
+                const timeA = new Date(`${a.fecha}T${a.hora}`).getTime();
+                const timeB = new Date(`${b.fecha}T${b.hora}`).getTime();
+                return timeA - timeB;
               })
             : [];
         },
-        error: () => { this.turnosHoy = []; }
+        error: (err) => {
+          console.error('Error al cargar turnos del día:', err);
+          this.turnosHoy = [];
+          this.toastr.error('No se pudieron cargar los turnos del día.');
+        }
       });
     } else {
       this.turnosHoy = [];
@@ -132,8 +139,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  getPacienteName(idPaciente: number): string {
-    const paciente = this.pacientes.find(p => p.idPaciente === idPaciente);
-    return paciente ? `${paciente.nombre} ${paciente.apellido}` : 'Paciente no encontrado';
+  getOdontologoName(odontologo: { nombre: string; apellido: string }): string {
+    return `Dr. ${odontologo.nombre} ${odontologo.apellido}`;
   }
 }
